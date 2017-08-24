@@ -208,6 +208,7 @@ throwputArray = compileFinal str
 [
 	["RGN Mini Grenade", "MiniGrenade", 50],
 	["RGO Frag Grenade", "HandGrenade", 100],
+	["Toxic Gas", "SmokeShellYellow", 50],
 	["APERS Tripwire Mine", "APERSTripMine_Wire_Mag", 200],
 	["APERS Bounding Mine", "APERSBoundingMine_Range_Mag", 250],
 	["APERS Mine", "APERSMine_Range_Mag", 300],
@@ -220,7 +221,6 @@ throwputArray = compileFinal str
 	["Smoke Grenade (Purple)", "SmokeShellPurple", 50],
 	["Smoke Grenade (Blue)", "SmokeShellBlue", 50],
 	["Smoke Grenade (Green)", "SmokeShellGreen", 50],
-	["Smoke Grenade (Yellow)", "SmokeShellYellow", 50],
 	["Smoke Grenade (Orange)", "SmokeShellOrange", 50],
 	["Smoke Grenade (Red)", "SmokeShellRed", 50]
 ];
@@ -229,6 +229,9 @@ throwputArray = compileFinal str
 //Text name, classname, buy cost
 ammoArray = compileFinal str
 [
+	["40mm 3Rnd HE Grenades", "3Rnd_HE_Grenade_shell", 300],
+	["40mm 3Rnd Toxic Gas", "3Rnd_SmokeYellow_Grenade_shell", 750],
+	["40mm Smoke Toxic Gas", "1Rnd_SmokeYellow_Grenade_shell", 250],
 	["9mm 10Rnd Mag", "10Rnd_9x21_Mag", 5],
 	["9mm 16Rnd Mag", "16Rnd_9x21_Mag", 10],
 	["9mm 30Rnd Mag", "30Rnd_9x21_Mag", 15],
@@ -291,19 +294,16 @@ ammoArray = compileFinal str
 	["Titan Anti-Personnel Missile", "Titan_AP", 350],        // Direct damage: low       | Splash damage: high   | Guidance: mouse, laser
 	["Titan Anti-Air Missile", "Titan_AA", 350],              // Direct damage: low       | Splash damage: medium | Guidance: aircraft
 	["40mm HE Grenade Round", "1Rnd_HE_Grenade_shell", 125],
-	["40mm 3Rnd HE Grenades", "3Rnd_HE_Grenade_shell", 250],
 	["40mm Smoke Round (White)", "1Rnd_Smoke_Grenade_shell", 50],
 	["40mm Smoke Round (Purple)", "1Rnd_SmokePurple_Grenade_shell", 50],
 	["40mm Smoke Round (Blue)", "1Rnd_SmokeBlue_Grenade_shell", 50],
 	["40mm Smoke Round (Green)", "1Rnd_SmokeGreen_Grenade_shell", 50],
-	["40mm Smoke Round (Yellow)", "1Rnd_SmokeYellow_Grenade_shell", 50],
 	["40mm Smoke Round (Orange)", "1Rnd_SmokeOrange_Grenade_shell", 50],
 	["40mm Smoke Round (Red)", "1Rnd_SmokeRed_Grenade_shell", 50],
 	["40mm 3Rnd Smokes (White)", "3Rnd_Smoke_Grenade_shell", 100],
 	["40mm 3Rnd Smokes (Purple)", "3Rnd_SmokePurple_Grenade_shell", 100],
 	["40mm 3Rnd Smokes (Blue)", "3Rnd_SmokeBlue_Grenade_shell", 100],
 	["40mm 3Rnd Smokes (Green)", "3Rnd_SmokeGreen_Grenade_shell", 100],
-	["40mm 3Rnd Smokes (Yellow)", "3Rnd_SmokeYellow_Grenade_shell", 100],
 	["40mm 3Rnd Smokes (Orange)", "3Rnd_SmokeOrange_Grenade_shell", 100],
 	["40mm 3Rnd Smokes (Red)", "3Rnd_SmokeRed_Grenade_shell", 100],
 	["40mm Flare Round (White)", "UGL_FlareWhite_F", 25],
@@ -399,8 +399,8 @@ accessoriesArray = compileFinal str
 headArray = compileFinal str
 [
 	["Modular Helmet (Digi)", "H_HelmetIA", 50, "hat"],
-	// ["MICH (Camo)", "H_HelmetIA_net", 50, "hat"],
-	// ["MICH 2 (Camo)", "H_HelmetIA_camo", 50, "hat"],
+	["MICH (Camo)", "H_HelmetIA_net", 50, "hat"],
+	["MICH 2 (Camo)", "H_HelmetIA_camo", 50, "hat"],
 	["Combat Helmet", "H_HelmetB", 50, "hat"],
 	["Combat Helmet (Black)", "H_HelmetB_black", 50, "hat"],
 	["Combat Helmet (Camonet)", "H_HelmetB_camo", 50, "hat"],
@@ -503,8 +503,8 @@ headArray = compileFinal str
 	["Shemag (Olive)", "H_Shemag_olive", 25, "hat"],
 	["Shemag (Olive, Headset)", "H_Shemag_olive_hs", 25, "hat"],
 	["Shemag (Tan)", "H_ShemagOpen_tan", 25, "hat"],
-	["Shemag (White)", "H_ShemagOpen_khk", 25, "hat"],
-	// ["Shemag mask (Tan)", "H_Shemag_tan", 25, "hat"],
+	["Shemag (White)", "H_ShemagOpen_khk", 25, "hat"]
+	/* ["Shemag mask (Tan)", "H_Shemag_tan", 25, "hat"],
 	["Racing Helmet (Black)", "H_RacingHelmet_1_black_F", 25, "hat"],
 	["Racing Helmet (Blue)", "H_RacingHelmet_1_blue_F", 25, "hat"],
 	["Racing Helmet (Green)", "H_RacingHelmet_1_green_F", 25, "hat"],
@@ -515,7 +515,7 @@ headArray = compileFinal str
 	["Racing Helmet (Fuel)", "H_RacingHelmet_1_F", 25, "hat"],
 	["Racing Helmet (Bluking)", "H_RacingHelmet_2_F", 25, "hat"],
 	["Racing Helmet (Redstone)", "H_RacingHelmet_3_F", 25, "hat"],
-	["Racing Helmet (Vrana)", "H_RacingHelmet_4_F", 25, "hat"]
+	["Racing Helmet (Vrana)", "H_RacingHelmet_4_F", 25, "hat"]*/
 ];
 
 uniformArray = compileFinal str
@@ -935,8 +935,8 @@ tanksArray = compileFinal str
 	["ZSU-39 Tigris AA", "O_APC_Tracked_02_AA_F", 40000, "vehicle"],
 	["M2A1 Slammer", "B_MBT_01_cannon_F", 50000, "vehicle"],
 	["M2A4 Slammer HMG", "B_MBT_01_TUSK_F", 50000, "vehicle"], // Commander gun variant
-	["T-100 Varsuk", "O_MBT_02_cannon_F", 50000, "vehicle"],
-	["MBT-52 Kuma", "I_MBT_03_cannon_F", 50000, "vehicle"]
+	["T-100 Varsuk", "O_MBT_02_cannon_F", 65000, "vehicle"],
+	["MBT-52 Kuma", "I_MBT_03_cannon_F", 60000, "vehicle"]
 ];
 
 helicoptersArray = compileFinal str
@@ -965,7 +965,7 @@ helicoptersArray = compileFinal str
 	["PO-30 Orca (DAR)", "O_Heli_Light_02_dynamicLoadout_F", 30000, "vehicle", "variant_orcaDAR"], // Armed Ka-60
 	["PO-30 Orca (DAGR)", "O_Heli_Light_02_dynamicLoadout_F", 40000, "vehicle", "variant_orcaDAGR"], // Armed Ka-60, add "HIDDEN" if you don't want it, but don't remove the line!
 	["WY-55 Hellcat (Armed)", "I_Heli_light_03_dynamicLoadout_F", 40000, "vehicle"], // Armed AW159
-	["AH-99 Blackfoot", "B_Heli_Attack_01_dynamicLoadout_F", 50000, "vehicle"], // RAH-66 with gunner
+	["AH-99 Blackfoot", "B_Heli_Attack_01_F", 85000, "vehicle"], // RAH-66 with gunner
 	["Mi-48 Kajman", "O_Heli_Attack_02_dynamicLoadout_F", 60000, "vehicle"], // Mi-28 with gunner 
 
 	["MQ-12 Falcon UAV", "B_T_UAV_03_F", 50000, "vehicle"] // Do NOT use "B_T_UAV_03_dynamicLoadout_F" (doesn't support ASRAAM pylons)
@@ -1062,6 +1062,7 @@ colorsArray = compileFinal str
 	[ // Main colors
 		"All",
 		[
+			["DEEZ NUTZ", _texDir + "DeezNutz1.paa"],
 			["Black", _color + "(0.01,0.01,0.01,1)"], // #(argb,8,8,3)color(0.1,0.1,0.1,0.1)
 			["Gray", _color + "(0.15,0.151,0.152,1)"], // #(argb,8,8,3)color(0.5,0.51,0.512,0.3)
 			["White", _color + "(0.75,0.75,0.75,1)"], // #(argb,8,8,3)color(1,1,1,0.5)

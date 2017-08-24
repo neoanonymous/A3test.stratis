@@ -91,6 +91,11 @@ if (isServer) then
 if (hasInterface || isServer) then
 {
 	//init 3rd Party Scripts
+	[] execVM "addons\clean\clean.sqf";//Body cleaning scripts
+	[] execVM "addons\cleanStores\cleanStores.sqf";//Store cleaning scripts
+	[] execVM "addons\HvT\HvT.sqf";//HVT
+	[] execVM "addons\Grenades\initGrenades.sqf";//Toxic Gas Nades
+	[] execVM "addons\laptop\init.sqf"; // addon for hack laptop mission
 	[] execVM "addons\parking\functions.sqf";
 	[] execVM "addons\storage\functions.sqf";
 	[] execVM "addons\vactions\functions.sqf";

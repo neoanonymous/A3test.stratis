@@ -60,6 +60,9 @@ A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 pvar_playerRespawn = [player, objNull];
 publicVariableServer "pvar_playerRespawn";
 
+// StatusBar
+if(hasInterface) then{[] execVM "addons\statusBar\statusbar.sqf"};
+
 //Player setup
 player call playerSetupStart;
 
