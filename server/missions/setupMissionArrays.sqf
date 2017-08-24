@@ -13,6 +13,7 @@ MainMissions =
 	["mission_Coastal_Convoy", 1],
 	["mission_Convoy", 1],
 	["mission_HostileHeliFormation", 0.5],
+	["mission_HostileJetFormation", 0.5],
 	["mission_APC", 1],
 	["mission_MBT", 1],
 	["mission_LightArmVeh", 1],
@@ -23,17 +24,19 @@ MainMissions =
 SideMissions =
 [
 	["mission_HostileHelicopter", 0.5],
+	["mission_nonA3W_HostileJet", 0.5],
 	["mission_MiniConvoy", 1],
-	["mission_SunkenSupplies", 1],
+	["mission_SunkenSupplies", 0.8],
 	["mission_TownInvasion", 2],
-	["mission_Outpost", 3],
+	["mission_Outpost", 2],
 	["mission_Truck", 1]
 ];
 
 MoneyMissions =
 [
-	["mission_MoneyShipment", 1],
-	["mission_SunkenTreasure", 1]
+	["mission_Hackers", 0.20],
+	["mission_MoneyShipment", 1.6],
+	["mission_SunkenTreasure", 0.8]
 ];
 
 MissionSpawnMarkers = (allMapMarkers select {["Mission_", _x] call fn_startsWith}) apply {[_x, false]};
