@@ -27,7 +27,7 @@ _unit allowFleeing 0;
 //_unit setSkill _skill;
 //_unit setSkill ["aimingAccuracy", (_unit skill "aimingAccuracy") * _accuracy];
 
-_unit setSkill ["aimingAccuracy", 0.1];
+_unit setSkill ["aimingAccuracy", 0.2];
 _unit setSkill ["aimingShake", 0.25];
 _unit setSkill ["aimingSpeed", 0.25];
 _unit setSkill ["endurance", 1];

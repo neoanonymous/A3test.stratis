@@ -52,7 +52,7 @@ _setupObjects =
 		_soldier moveInDriver _vehicle;
 		// lock the vehicle untill the mission is finished and initialize cleanup on it
 		
-		// Reset all flares to 60
+		// Reset all flares to 0
 		if (_type isKindOf "Air") then
 		{
 			{
@@ -62,7 +62,7 @@ _setupObjects =
 				};
 			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
 
-			_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine", [-1]];
+			//_vehicle addMagazineTurret ["60Rnd_CMFlare_Chaff_Magazine", [-1]];
 		};
 		
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;

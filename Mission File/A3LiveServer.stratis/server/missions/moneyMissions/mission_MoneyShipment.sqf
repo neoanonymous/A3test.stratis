@@ -25,7 +25,7 @@ _setupVars =
 		// Easy
 		[
 			"Small Money Shipment", // Marker text
-			200000, // Money
+			50000, // Money
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F"], // Veh 1
@@ -44,7 +44,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Money Shipment", // Marker text
-			350000, // Money
+			100000, // Money
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F"], // Veh 1
@@ -66,7 +66,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Money Shipment", // Marker text
-			500000, // Money
+			150000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F"], // Veh 1
@@ -88,7 +88,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Money Shipment", // Marker text
-			650000, // Money
+			200000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -112,7 +112,7 @@ _setupVars =
 		],
 		[
 			"You're SCREWED Money Shipment", // Marker text B_Heli_Attack_01_dynamicLoadout_F
-			850000, // Money
+			350000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F", "B_Heli_Attack_01_F"], // Veh 1
@@ -208,7 +208,7 @@ _setupObjects =
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
 
-	_aiGroup setCombatMode "YELLOW"; // units will defend themselves
+	_aiGroup setCombatMode "GREEN"; // units will defend themselves
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
 	_aiGroup setFormation "STAG COLUMN";
 
@@ -220,7 +220,7 @@ _setupObjects =
 		_waypoint = _aiGroup addWaypoint [_x, 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 25;
-		_waypoint setWaypointCombatMode "YELLOW";
+		_waypoint setWaypointCombatMode "GREEN";
 		_waypoint setWaypointBehaviour "SAFE"; // safe is the best behaviour to make AI follow roads, as soon as they spot an enemy or go into combat they WILL leave the road for cover though!
 		_waypoint setWaypointFormation "STAG COLUMN";
 		_waypoint setWaypointSpeed _speedMode;

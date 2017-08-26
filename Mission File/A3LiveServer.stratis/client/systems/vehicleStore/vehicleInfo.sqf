@@ -46,6 +46,15 @@ _colorsArray  = [];
 _cfgColors = call colorsArray;
 reverse _cfgColors;
 
+//HA GOT EM
+/*
+if {_colorsArray isKindOf "DEEZ-NUTZ"}then
+{
+	playSound3D [call currMissionDir + "client\sounds\DeezNutz.ogg", vehicle player, false, getPosASL player, 10, 1, 50];
+};*/
+
+
+
 {
 	_class = _x select 0;
 	_texs = _x select 1;
