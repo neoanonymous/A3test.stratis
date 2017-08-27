@@ -8,10 +8,10 @@ if (!CHVD_allowNoGrass) then {
 };
 
 switch (_index) do {
-	case 0: {_terrainGrid = 50};
-	case 1: {_terrainGrid = 25};
-	case 2: {_terrainGrid = 12.5};
-	case 3: {_terrainGrid = 3.125};
+	case 0: {_terrainGrid = 1};
+	case 1: {_terrainGrid = 1};
+	case 2: {_terrainGrid = 1};
+	case 3: {_terrainGrid = 1};
 };
 
 if (!CHVD_allowNoGrass) then {

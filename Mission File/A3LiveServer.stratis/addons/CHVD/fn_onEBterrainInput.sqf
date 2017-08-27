@@ -4,7 +4,7 @@ _textCtrl = param [1, controlNull, [0, controlNull]];
 _listbox = param [2, controlNull, [0, controlNull]];
 
 _textValue = [ctrlText _textCtrl, "0123456789."] call BIS_fnc_filterString;
-_textValue = if (_textValue == "") then {50} else {call compile _textValue min 50 max 3.125};
+_textValue = if (_textValue == "") then {50} else {call compile _textValue min 1 max 1};
 
 
 if (!CHVD_allowNoGrass) then {

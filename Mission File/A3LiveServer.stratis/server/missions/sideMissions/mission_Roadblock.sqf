@@ -1,42 +1,34 @@
 // ******************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
+// * This project is licensed under the GNU Affero GPL v3. Copyright Â© 2016 A3Wasteland.com *
 // ******************************************************************************************
-//	@file Name: mission_Roadblock.sqf
-//	@file Author: JoSchaap, AgentRev, LouD
+//	@file Version: 1.0
+//	@file Name: mission_RoadBlock.sqf
+//	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, soulkobk
+//	@file Created: 08/12/2012 15:19
+//	@file Modified: 4:31 PM 06/07/2016 (soulkobk)
 
 if (!isServer) exitwith {};
+
 #include "sideMissionDefines.sqf";
 
-private [ "_box1", "_barGate", "_bunker1", "_bunker2", "_obj1", "_obj2", "_drop_item", "_drugpilerandomizer", "_drugpile"];
+private ["_nbUnits", "_roadBlock", "_objects", "_loadout"];
 
 _setupVars =
 {
-	_missionType = "Roadblock";
-	_locationsArray = RoadblockMissionMarkers;
+	_missionType = "Road Block";
+	_locationsArray = RoadBlockMissionMarkers;
 };
-
 _setupObjects =
 {
+	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
 	_missionPos = markerPos _missionLocation;
-	_markerDir = markerDir _missionLocation;
-	
-	//delete existing base parts and vehicles at location
-	_baseToDelete = nearestObjects [_missionPos, ["All"], 25];
-	{ deleteVehicle _x } forEach _baseToDelete; 	
-	
-	_bargate = createVehicle ["Land_BarGate_F", _missionPos, [], 0, "NONE"];
-	_bargate setDir _markerDir;
-	_bunker1 = createVehicle ["Land_BagBunker_Small_F", _bargate modelToWorld [6.5,-2,-4.1], [], 0, "NONE"];
-	_obj1 = createVehicle ["I_GMG_01_high_F", _bargate modelToWorld [6.5,-2,-4.1], [], 0, "NONE"];
-	_bunker1 setDir _markerDir;
-	_bunker2 = createVehicle ["Land_BagBunker_Small_F", _bargate modelToWorld [-8,-2,-4.1], [], 0, "NONE"];
-	_obj2 = createVehicle ["I_GMG_01_high_F", _bargate modelToWorld [-8,-2,-4.1], [], 0, "NONE"];
-	_bunker2 setDir _markerDir;
-
+	_missionDir = markerDir _missionLocation;
+	_roadBlock = selectRandom (call compile preprocessFileLineNumbers "server\missions\roadBlocks\roadBlockList.sqf");
+	_objects = [_roadBlock, _missionPos, _missionDir] call createRoadBlock;
+	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach _objects;
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup,_missionPos,12,15] spawn createCustomGroup3;
-	
-	_missionHintText = format ["Enemies have set up an illegal roadblock and are stopping all vehicles! They need to be stopped!", sideMissionColor];
+	[_aiGroup, _missionPos, _nbUnits, 15] call createCustomGroup;
+	_missionHintText = format ["Enemies have set up a road block and are stopping all traffic! Go and take it over!", sideMissionColor];
 };
 
 _waitUntilMarkerPos = nil;
@@ -45,58 +37,69 @@ _waitUntilCondition = nil;
 
 _failedExec =
 {
-	// Mission failed
-	
-	{ deleteVehicle _x } forEach [_barGate, _bunker1, _bunker2, _obj1, _obj2];
-	
+	{ deleteVehicle _x } forEach _objects;
 };
-
-_drop_item = 
-{
-	private["_item", "_pos"];
-	_item = _this select 0;
-	_pos = _this select 1;
-
-	if (isNil "_item" || {typeName _item != typeName [] || {count(_item) != 2}}) exitWith {};
-	if (isNil "_pos" || {typeName _pos != typeName [] || {count(_pos) != 3}}) exitWith {};
-
-	private["_id", "_class"];
-	_id = _item select 0;
-	_class = _item select 1;
-
-	private["_obj"];
-	_obj = createVehicle [_class, _pos, [], 5, "None"];
-	_obj setPos ([_pos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-	_obj setVariable ["mf_item_id", _id, true];
-};
-
 _successExec =
 {
-	// Mission completed
-	_randomBox = ["mission_USLaunchers","mission_USSpecial","mission_Main_A3snipers"] call BIS_fnc_selectRandom;
-	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, _randomBox] call fn_refillbox;
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1];
-	{ deleteVehicle _x } forEach [_barGate, _bunker1, _bunker2];
-	{ _x setVariable ["allowDamage", true, true] } forEach [_obj1, _obj2];
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach _objects;
 	
-	_drugpilerandomizer = [4,8];
-	_drugpile = _drugpilerandomizer call BIS_fnc_SelectRandom;
+	[_locationsArray, _missionLocation, _objects] call setLocationObjects;
 	
-	for "_i" from 1 to _drugpile do 
-	{
-	  private["_item"];
-	  _item = [
-	          ["lsd", "Land_WaterPurificationTablets_F"],
-	          ["marijuana", "Land_VitaminBottle_F"],
-	          ["cocaine","Land_PowderedMilk_F"],
-	          ["heroin", "Land_PainKillers_F"]
-	        ] call BIS_fnc_selectRandom;
-	  [_item, _lastPos] call _drop_item;
-	};
+	_successHintMessage = "The road block has been taken over, good work!";
 
-	_successHintMessage = format ["The roadblock has been dismantled."];
+	// changed by soulkobk for random number of boxes and random crate loot
+	_crateBoxes = 
+	[
+		"Box_IND_Ammo_F",
+		"Box_IND_AmmoOrd_F",
+		"Box_IND_Grenades_F",
+		"Box_IND_Support_F",
+		"Box_IND_Wps_F",
+		"Box_IND_WpsLaunch_F",
+		"Box_IND_WpsSpecial_F"
+	];
+	_numBoxes = round(random 2) + 1; // minimum 1, maximum 4.
+	switch (_numBoxes) do // because apparently a for _i loop doesnt work with missions... bad coding? pfft.
+	{
+		case 1: {
+			_crateBox1 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox1 setDir random 360;
+			_crateBox1 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+		};
+		case 2: {
+			_crateBox1 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox1 setDir random 360;
+			_crateBox1 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox2 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox2 setDir random 360;
+			_crateBox2 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+		};
+		case 3: {
+			_crateBox1 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox1 setDir random 360;
+			_crateBox1 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox2 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox2 setDir random 360;
+			_crateBox2 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox3 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox3 setDir random 360;
+			_crateBox3 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+		};
+		case 4: {
+			_crateBox1 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox1 setDir random 360;
+			_crateBox1 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox2 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox2 setDir random 360;
+			_crateBox2 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox3 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox3 setDir random 360;
+			_crateBox3 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+			_crateBox4 = createVehicle [(selectRandom _crateBoxes), _missionPos, [], 15, "None"];
+			_crateBox4 setDir random 360;
+			_crateBox4 call randomCrateLoadOut; // must use soulkobk' randomCrateLoadOut script (github.com/soulkobk).
+		};
+	};
 };
 
 _this call sideMissionProcessor;
