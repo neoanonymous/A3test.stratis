@@ -50,7 +50,7 @@
 if !(isServer) exitWith {}; // DO NOT DELETE THIS LINE! 
 
 
-SL_cleanUpDuration = 2*60; // maximum duration time in seconds that items are left on the ground for. (default 2 minutes) 
+SL_cleanUpDuration = 10*60; // maximum duration time in seconds that items are left on the ground for. (default 2 minutes) 
 SL_cleanUpRadius = 250; // maximum radius in meters from store NPC to clean up. (default 15 meters) 
 SL_cleanUpSleep = 10; // sleep time in seconds per object loop check. (default 10 seconds) 
 
