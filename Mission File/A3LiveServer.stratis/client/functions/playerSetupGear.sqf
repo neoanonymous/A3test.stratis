@@ -34,10 +34,10 @@ if (hmd _player != "") then { _player unlinkItem hmd _player };
 _player linkItem "NVGoggles";
 
 _player addBackpack "B_AssaultPack_rgr";
-_player addMagazines ["30Rnd_9x21_Mag_SMG_02", 4];
-_player addWeapon "SMG_05_F";
+_player addMagazines ["30Rnd_45ACP_MAG_SMG_01", 4];
+_player addWeapon "SMG_01_F";
 _player addItem "FirstAidKit";
-_player selectWeapon "SMG_05_F";
+_player selectWeapon "SMG_01_F";
 
 switch (true) do
 {
