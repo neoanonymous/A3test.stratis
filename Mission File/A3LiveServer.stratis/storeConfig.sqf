@@ -208,7 +208,7 @@ throwputArray = compileFinal str
 [
 	["RGN Mini Grenade", "MiniGrenade", 50],
 	["RGO Frag Grenade", "HandGrenade", 100],
-	["Toxic Gas", "SmokeShellYellow", 50],
+	["Toxic Gas", "SmokeShellYellow", 350],
 	["APERS Tripwire Mine", "APERSTripMine_Wire_Mag", 200],
 	["APERS Bounding Mine", "APERSBoundingMine_Range_Mag", 250],
 	["APERS Mine", "APERSMine_Range_Mag", 300],
