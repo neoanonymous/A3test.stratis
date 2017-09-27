@@ -51,28 +51,46 @@ switch(_switch) do
 	};
 	case 2:
 	{
-		_itemsArray = call rifleArray;
+		_itemsArray = call dmrArray;
 		_showAmmo = true;
 	};
 	case 3:
 	{
-		_itemsArray = call lmgArray;
+		_itemsArray = call arArray;
+		_showAmmo = true;
+	};
+	case 4:
+	{
+		_itemsArray = call sniperArray;
 		_showAmmo = true;
 	};
 	case 5:
 	{
-		_itemsArray = call launcherArray;
+		_itemsArray = call lmgArray;
 		_showAmmo = true;
 	};
 	case 6:
 	{
-		_itemsArray = call throwputArray;
+		_itemsArray = call launcherArray;
+		_showAmmo = true;
 	};
 	case 7:
 	{
-		_itemsArray = call accessoriesArray;
+		_itemsArray = call throwputArray;
 	};
 	case 8:
+	{
+		_itemsArray = call accessoriesArray;
+	};
+	case 9:
+	{
+		_itemsArray = call scopesArray;
+	};
+	case 10:
+	{
+		_itemsArray = call silencersArray;
+	};
+	case 11:
 	{
 		_itemsArray = [];
 
