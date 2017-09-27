@@ -17,9 +17,7 @@
 enableSaving [false, false];
 
 // block script injection exploit
-inGameUISetEventHandler ["PrevAction", ""];
-inGameUISetEventHandler ["Action", ""];
-inGameUISetEventHandler ["NextAction", ""];
+A3W_sessionTimeStart = diag_tickTime;
 
 _descExtPath = str missionConfigFile;
 currMissionDir = compileFinal str (_descExtPath select [0, count _descExtPath - 15]);
