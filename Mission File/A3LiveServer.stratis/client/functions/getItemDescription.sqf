@@ -52,7 +52,7 @@ if (isNil "_itemEntry") then
 				default                                               { _parentCfg = "CfgWeapons" };
 			};
 		};
-	} forEach (call accessoriesArray);
+	} forEach (call accessoriesArray + call scopesArray + call silencersArray);
 };
 
 if (isNil "_itemEntry") then

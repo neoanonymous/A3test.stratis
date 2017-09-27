@@ -85,4 +85,4 @@ if !(pvar_PlayerTeamKiller isEqualTo []) then
 	[] execVM "client\functions\createTeamKillDialog.sqf";
 };
 
-player setVariable ["loadOutPurchased",false];
+setTerrainGrid 1;
