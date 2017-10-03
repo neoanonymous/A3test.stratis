@@ -317,8 +317,8 @@ class RespawnSelectionDialog
 		class RspnKillfeedButton: RspnButton
 		{
 			idc = -1;
-			text = "Killfeed";
-			onButtonClick = "with missionNamespace do { [] call A3W_fnc_killFeedMenu }";
+			text = "VA";
+			onButtonClick = "_this call vaforall; ";
 
 			x = RspnKillfeedButton_X;
 			y = RspnLobbyButton_Y;
