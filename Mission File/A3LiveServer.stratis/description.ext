@@ -53,6 +53,9 @@ briefing = 0; // if 0, skip Continue button
 #include "client\systems\groups\dialog\groupManagement.hpp"
 #include "client\systems\gunStore\dialog\gunshop_settings.hpp"
 #include "client\systems\generalStore\dialog\genstore_settings.hpp"
+//#include "client\systems\walmart\dialog\walmart_settings.hpp"
+#include "client\systems\spawnshop1\dialog\spawnshop1_settings.hpp" //SS1 gun
+#include "client\systems\spawnshop2\dialog\spawnshop2_settings.hpp" //SS1 gen
 #include "client\systems\vehicleStore\dialog\vehiclestore_settings.hpp"
 #include "client\systems\adminPanel\dialog\adminMenu.hpp"
 #include "client\systems\adminPanel\dialog\modMenu.hpp"
