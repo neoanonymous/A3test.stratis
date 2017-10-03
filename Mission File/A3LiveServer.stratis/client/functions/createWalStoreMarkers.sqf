@@ -63,6 +63,55 @@ _col_mixed = "ColorOrange";
 	};
 } forEach entities "CAManBase";
 
+//Creates the markers around gunstores.
+{
+	if (!isPlayer _x && {(vehicleVarName _x) select [0,8] == "WalMart2"}) then
+	{
+		_npcPos = getPosATL _x;
+
+		if (["A3W_showGunStoreStatus"] call isConfigOn) then
+		{
+			// Circle zone
+			_markerName = format["marker_shop_zone_%1",_x];
+			deleteMarkerLocal _markerName;
+			_marker = createMarkerLocal [_markerName, _npcPos];
+			_markerName setMarkerShapeLocal "ELLIPSE";
+			_markerName setMarkerColorLocal _col_empty;
+			_markerName setMarkerSizeLocal [_radius, _radius];
+			_markerName setMarkerBrushLocal "Grid";
+			_markerName setMarkerAlphaLocal 0.5;
+		};
+
+		/*
+		// Gun store title
+		_markerName = format["marker_shop_title_%1",_x];
+		deleteMarkerLocal _markerName;
+		_marker = createMarkerLocal [_markerName, _npcPos];
+		_markerName setMarkerShapeLocal "ICON";
+		_markerName setMarkerTypeLocal "mil_dot";
+		_markerName setMarkerColorLocal "ColorRed";
+		_markerName setMarkerSizeLocal [1,1];
+		_markerName setMarkerTextLocal "GUN STORE";
+		*/
+
+		// Gun store description
+		_markerName = format["marker_shop_desc_%1",_x];
+		deleteMarkerLocal _markerName;
+		// _npcPos set [1, (_npcPos select 1) - 100];
+		_marker = createMarkerLocal [_markerName, _npcPos];
+		_markerName setMarkerShapeLocal "ICON";
+		_markerName setMarkerTypeLocal "mil_dot";
+		_markerName setMarkerColorLocal _col_empty;
+		_markerName setMarkerSizeLocal [1,1];
+		_markerName setMarkerTextLocal "WALMART";
+		// _markerName setMarkerAlphaLocal 0.5;
+
+		_status pushBack "EMPTY";
+
+		_gunStores pushBack _x;
+	};
+} forEach entities "CAManBase";
+
 //Used to set the status of each store.
 _setStatus =
 {

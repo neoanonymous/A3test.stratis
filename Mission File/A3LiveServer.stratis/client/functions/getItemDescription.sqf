@@ -34,7 +34,7 @@ if (isNil "_itemEntry") then
 			_itemEntry = _x;
 			_parentCfg = "CfgMagazines";
 		};
-	} forEach (call throwputArray);
+	} forEach (call throwputArray + call ssthrowputArray);
 };
 
 if (isNil "_itemEntry") then
@@ -52,7 +52,7 @@ if (isNil "_itemEntry") then
 				default                                               { _parentCfg = "CfgWeapons" };
 			};
 		};
-	} forEach (call accessoriesArray);
+	} forEach (call accessoriesArray + call scopesArray + call silencersArray);
 };
 
 if (isNil "_itemEntry") then

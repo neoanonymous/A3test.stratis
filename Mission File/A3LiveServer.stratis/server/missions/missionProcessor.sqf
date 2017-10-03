@@ -164,22 +164,31 @@ else
 	{
 		_vehicle setVariable ["R3F_LOG_disabled", false, true];
 		_vehicle setVariable ["A3W_missionVehicle", true, true];
+		_vehicle setVariable ["A3W_lockpickDisabled", nil, true];
 
-		if (!isNil "fn_manualVehicleSave") then
+		if (!isNil "fn_manualVehicleSave" && !(_vehicle getVariable ["A3W_skipAutoSave", false])) then
 		{
 			_vehicle call fn_manualVehicleSave;
 		};
 	};
+
+	private _convoyAutoSave = ["A3W_missionVehicleSaving"] call isConfigOn;
 
 	if (!isNil "_vehicles" && {typeName _vehicles == "ARRAY"}) then
 	{
 		{
 			if (!isNil "_x" && {typeName _x == "OBJECT"}) then
 			{
+				if (!_convoyAutoSave) then
+				{
+					_x setVariable ["A3W_skipAutoSave", true, true];
+				};
+
 				_x setVariable ["R3F_LOG_disabled", false, true];
 				_x setVariable ["A3W_missionVehicle", true, true];
+				_x setVariable ["A3W_lockpickDisabled", nil, true];
 
-				if (!isNil "fn_manualVehicleSave") then
+				if (!isNil "fn_manualVehicleSave" && !(_x getVariable ["A3W_skipAutoSave", false])) then
 				{
 					_x call fn_manualVehicleSave;
 				};

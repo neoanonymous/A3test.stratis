@@ -20,6 +20,7 @@ onKeyRelease = "client\clientEvents\onKeyRelease.sqf" call mf_compile;
 A3W_fnc_copilotTakeControl = "client\functions\copilotTakeControl.sqf" call mf_compile;
 A3W_fnc_inGameUIActionEvent = "client\functions\fn_inGameUIActionEvent.sqf" call mf_compile;
 A3W_fnc_forceOpenParachute = "client\functions\fn_forceOpenParachute.sqf" call mf_compile;
+A3W_fnc_killFeedMenu = "client\systems\killFeed\killFeedMenu.sqf" call mf_compile;
 A3W_fnc_openParachute = "client\functions\fn_openParachute.sqf" call mf_compile;
 A3W_fnc_titleTextMessage = "client\functions\titleTextMessage.sqf" call mf_compile;
 addWeaponInventory = "client\functions\addWeaponInventory.sqf" call mf_compile;
@@ -42,6 +43,7 @@ fn_forceSaveObject = "client\functions\fn_forceSaveObject.sqf" call mf_compile;
 fn_forceSaveVehicle = "client\functions\fn_forceSaveVehicle.sqf" call mf_compile;
 fn_formatTimer = "client\functions\fn_formatTimer.sqf" call mf_compile;
 fn_getItemArmor = "client\functions\fn_getItemArmor.sqf" call mf_compile;
+fn_killFeedRefresh = "client\systems\killFeed\fn_killFeedRefresh.sqf" call mf_compile;
 fn_removeAllManagedActions = "client\functions\fn_removeAllManagedActions.sqf" call mf_compile;
 fn_removeManagedAction = "client\functions\fn_removeManagedAction.sqf" call mf_compile;
 fn_voiceChatControl = "client\functions\fn_voiceChatControl.sqf" call mf_compile;
@@ -62,6 +64,10 @@ unitHandleDamage = "client\functions\unitHandleDamage.sqf" call mf_compile;
 updateTerritoryMarkers = "territory\client\updateTerritoryMarkers.sqf" call mf_compile;
 vehicleSideCfg = "client\functions\vehicleSideCfg.sqf" call mf_compile;
 weaponDisassembledEvent = "client\functions\weaponDisassembledEvent.sqf" call mf_compile;
+
+//CCG's VA for all system
+vaforall = "addons\scripts\vaforall.sqf" call mf_compile;
+
 
 // Player details and actions
 loadPlayerMenu = "client\systems\playerMenu\init.sqf" call mf_compile;
@@ -94,6 +100,12 @@ fn_checkStoreItemDLC = "client\functions\fn_checkStoreItemDLC.sqf" call mf_compi
 fn_respawnTimer = "client\systems\scoreboard\fn_respawnTimer.sqf" call mf_compile;
 loadGeneralStore = "client\systems\generalStore\loadGenStore.sqf" call mf_compile;
 loadGunStore = "client\systems\gunStore\loadGunStore.sqf" call mf_compile;
+//spawn shops
+loadGunStore1 = "client\systems\spawnshop1\loadGunStore.sqf" call mf_compile; //SS1
+loadGeneralStore2 = "client\systems\spawnshop2\loadGenStore.sqf" call mf_compile; //SS2
+populateGunStore1 = "client\systems\spawnshop1\populateGunStore.sqf" call mf_compile; //SS1
+populateGeneralStore2 = "client\systems\spawnshop2\populateGenStore.sqf" call mf_compile; //SS2
+//spawn shops
 loadScoreboard = "client\systems\scoreboard\loadScoreboard.sqf" call mf_compile;
 loadVehicleStore = "client\systems\vehicleStore\loadVehicleStore.sqf" call mf_compile;
 gearProperties = "client\functions\gearProperties.sqf" call mf_compile;
@@ -104,6 +116,7 @@ getSellPriceList = "client\systems\selling\getSellPriceList.sqf" call mf_compile
 populateGeneralStore = "client\systems\generalStore\populateGenStore.sqf" call mf_compile;
 populateGunStore = "client\systems\gunStore\populateGunStore.sqf" call mf_compile;
 populateVehicleStore = "client\systems\vehicleStore\populateVehicleStore.sqf" call mf_compile;
+populatewalmart = "client\systems\walmart\populatewalmart.sqf" call mf_compile; //>>WALMART<<
 requestStoreObject = "client\functions\requestStoreObject.sqf" call mf_compile;
 vehicleInfo = "client\systems\vehicleStore\vehicleInfo.sqf" call mf_compile;
 weaponInfo = "client\systems\gunStore\weaponInfo.sqf" call mf_compile;

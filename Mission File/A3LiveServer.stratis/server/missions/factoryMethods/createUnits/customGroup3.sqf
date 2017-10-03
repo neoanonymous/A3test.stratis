@@ -95,7 +95,6 @@ for "_i" from 1 to _nbUnits do
 				_unit addMagazine "30Rnd_65x39_caseless_mag";
 				_unit addMagazine "30Rnd_65x39_caseless_mag";
 				_unit addPrimaryWeaponItem "optic_Hamr";
-				_unit addMagazine "HandGrenade";
 				_unit setRank "SERGEANT";
 			}
 			else
@@ -106,7 +105,6 @@ for "_i" from 1 to _nbUnits do
 				_unit addMagazine "30Rnd_65x39_caseless_mag";
 				_unit addMagazine "30Rnd_65x39_caseless_mag";
 				_unit addPrimaryWeaponItem "optic_Hamr";
-				_unit addMagazine "HandGrenade";
 			};
 		};
 	};

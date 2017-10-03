@@ -7,6 +7,8 @@
 //	@file Created: 20/11/2012 05:19
 //	@file Args:
 
+#define UNCONSCIOUS (player call A3W_fnc_isUnconscious)
+
 private ["_key", "_shift", "_ctrl", "_alt", "_handled"];
 
 _key = _this select 1;
@@ -146,7 +148,7 @@ switch (true) do
 	// Tilde (key above Tab)
 	case (_key in A3W_customKeys_playerMenu):
 	{
-		[] spawn loadPlayerMenu;
+		if (alive player && !UNCONSCIOUS) then { [] spawn loadPlayerMenu } else { [] call A3W_fnc_killFeedMenu };
 		_handled = true;
 	};
 
@@ -173,6 +175,9 @@ switch (true) do
 };
 
 // ********** Action keys **********
+
+if (!UNCONSCIOUS) then // ####################
+{
 
 // Parachute
 if (!_handled && _key in actionKeys "GetOver") then
@@ -223,6 +228,32 @@ if (!_handled && _key in actionKeys "GetOut") then
 	};
 };
 
+// Override prone reload freeze (ffs BIS)
+if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
+{
+	if ((toLower animationState player) find "reloadprone" != -1) then
+	{
+		[player, format ["AmovPknlMstpSrasW%1Dnon", [player, true] call getMoveWeapon]] call switchMoveGlobal;
+		reload player;
+	};
+};
+
+} // ####################
+else // UNCONSCIOUS
+{
+	if (_key == 57) then // spacebar
+	{
+		execVM "client\functions\confirmSuicide.sqf";
+		_handled = true;
+	};
+
+	if (_key == 14) then // backspace
+	{
+		execVM "addons\far_revive\FAR_lastResort.sqf";
+		_handled = true;
+	};
+};
+
 // Scoreboard
 if (!_handled && _key in actionKeys "NetworkStats") then
 {
@@ -244,25 +275,6 @@ if (!_handled && _key in call A3W_allVoiceChatKeys) then
 {
 	[true] call fn_voiceChatControl;
 };
-
-// UAV feed
-if (!_handled && _key in (actionKeys "UavView" + actionKeys "UavViewToggle")) then
-{
-	if (["A3W_disableUavFeed"] call isConfigOn) then
-	{
-		_handled = true;
-	};
-};
-
-// Override prone reload freeze (ffs BIS)
-if (!_handled && _key in (actionKeys "MoveDown" + actionKeys "MoveUp")) then
-{
-	if ((toLower animationState player) find "reloadprone" != -1) then
-	{
-		[player, format ["AmovPknlMstpSrasW%1Dnon", [player, true] call getMoveWeapon]] call switchMoveGlobal;
-		reload player;
-	};
-};
 //Holster / recall weapon.
 if (!_handled && _key == 35) then
 {
@@ -278,4 +290,23 @@ if (!_handled && _key == 35) then
 		};
 	};
 };
+
+// UAV feed
+if (!_handled && _key in (actionKeys "UavView" + actionKeys "UavViewToggle")) then
+{
+	if (["A3W_disableUavFeed"] call isConfigOn) then
+	{
+		_handled = true;
+	};
+};
+
+// Block 3rd person and group cam while injured
+if (!_handled && _key in (actionKeys "PersonView" + actionKeys "TacticalView")) then
+{
+	if (UNCONSCIOUS) then
+	{
+		_handled = true;
+	};
+};
+
 _handled

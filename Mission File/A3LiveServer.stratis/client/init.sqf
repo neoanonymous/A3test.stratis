@@ -17,7 +17,6 @@ if (!isServer) then
 waitUntil {!isNil "A3W_serverSetupComplete"};
 
 [] execVM "client\functions\bannedNames.sqf";
-[] execVM "client\functions\afkTimer.sqf";
 
 showPlayerIcons = true;
 mutexScriptInProgress = false;
@@ -25,6 +24,9 @@ respawnDialogActive = false;
 groupManagmentActive = false;
 pvar_PlayerTeamKiller = [];
 doCancelAction = false;
+
+//AJ Beacondetector
+BeaconScanInProgress = false;
 
 //Initialization Variables
 playerCompiledScripts = false;
@@ -60,9 +62,6 @@ A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 
 pvar_playerRespawn = [player, objNull];
 publicVariableServer "pvar_playerRespawn";
-
-// StatusBar
-if(hasInterface) then{[] execVM "addons\statusBar\statusbar.sqf"};
 
 //Player setup
 player call playerSetupStart;
@@ -130,6 +129,7 @@ call compile preprocessFileLineNumbers "client\functions\setupClientPVars.sqf";
 
 //client Executes
 A3W_scriptThreads pushBack execVM "client\systems\hud\playerHud.sqf";
+A3W_scriptThreads pushBack execVM "client\systems\killFeed\killFeed.sqf";
 
 if (["A3W_survivalSystem"] call isConfigOn) then
 {
@@ -139,6 +139,7 @@ if (["A3W_survivalSystem"] call isConfigOn) then
 [] spawn
 {
 	[] execVM "client\functions\createGunStoreMarkers.sqf";
+	[] execVM "client\functions\createWalStoreMarkers.sqf";
 
 	if (["A3W_privateParking"] call isConfigOn) then
 	{
@@ -153,8 +154,6 @@ if (["A3W_survivalSystem"] call isConfigOn) then
 	[] execVM "client\functions\createGeneralStoreMarkers.sqf";
 	[] execVM "client\functions\createVehicleStoreMarkers.sqf";
 	[] execVM "client\functions\createLegendMarkers.sqf";
-	[] execVM "client\functions\createWalStoreMarkers.sqf";
-	
 };
 
 A3W_clientSetupComplete = compileFinal "true";
@@ -174,6 +173,7 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 
 { [_x] call fn_remotePlayerSetup } forEach allPlayers;
 
+
 // update player's spawn beaoon
 {
 	if (_x getVariable ["ownerUID",""] == getPlayerUID player) then
@@ -182,3 +182,9 @@ inGameUISetEventHandler ["Action", "_this call A3W_fnc_inGameUIActionEvent"];
 		_x setVariable ["side", playerSide, true];
 	};
 } forEach pvar_spawn_beacons;
+
+// StatusBar
+if(hasInterface) then{[] execVM "addons\statusBar\statusbar.sqf"};
+[] execVM "addons\disableThermal\disablethermal.sqf";  //disable thermal vision
+
+setTerrainGrid 1;

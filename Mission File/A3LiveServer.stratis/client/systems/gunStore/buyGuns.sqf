@@ -171,9 +171,8 @@ storePurchaseHandle = _this spawn
 							};
 						};
 					};
-				} forEach (call accessoriesArray);
+				} forEach (call access0Array + call access1Array + call access2Array);
 			};
-
 			if (isNil "_price") then
 			{
 				{
