@@ -18,7 +18,12 @@ storeOwnerConfig = compileFinal str
 	
 	//WALMART
 	["WalMart1", -1, [], ["Boats"]],
+	["WalMart2", -1, [], []],
 	//WALMART
+	
+	//SS
+	["spawnshop1", -1, [], []],
+	//SS
 
 	["GunStore1", -1, [], []],
 	["GunStore2", 1, 130, []],

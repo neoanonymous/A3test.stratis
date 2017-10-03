@@ -34,7 +34,7 @@ if (isNil "_itemEntry") then
 			_itemEntry = _x;
 			_parentCfg = "CfgMagazines";
 		};
-	} forEach (call throwputArray);
+	} forEach (call throwputArray + call ssthrowputArray);
 };
 
 if (isNil "_itemEntry") then

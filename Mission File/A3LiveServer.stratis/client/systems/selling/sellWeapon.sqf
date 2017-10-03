@@ -84,7 +84,7 @@ storeSellingHandle = [] spawn
 			{
 				_magValue = _x select 2;
 			};
-		} forEach (call ammoArray);
+		} forEach (call ammoArray + call ssammoArray);
 
 		{
 			_sellValue = _sellValue + GET_HALF_PRICE(_magValue * (_x / _magFullAmmo)); // Get selling price relative to ammo count

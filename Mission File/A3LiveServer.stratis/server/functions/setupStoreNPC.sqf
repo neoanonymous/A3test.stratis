@@ -59,6 +59,11 @@ if (hasInterface) then
 			_npc addAction ["<img image='addons\buySaveLoadOut\saveLoadOut.paa'/> Save Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","SAVE", 1, false, true, "", STORE_ACTION_CONDITION];
 			_npc addAction ["<img image='addons\buySaveLoadOut\buyLoadOut.paa'/> Buy Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","BUY", 1, false, true, "", STORE_ACTION_CONDITION  + " && (player getVariable ['currentLoadOut',false])"];
 		};
+		case (["spawnshop", _npcName] call _startsWith):
+		{
+			_npc addAction ["<img image='client\icons\store.paa'/> Open Gun Store", "client\systems\spawnshop1\loadgunStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
+			_npc addAction ["<img image='client\icons\store.paa'/> Open General Store", "client\systems\spawnshop2\loadgenStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
+		};
 	};
 
 	_npc addAction ["<img image='client\icons\money.paa'/> Sell crate", "client\systems\selling\sellCrateItems.sqf", [false, false, true], 0.99, false, true, "", STORE_ACTION_CONDITION + " && " + SELL_CRATE_CONDITION];
