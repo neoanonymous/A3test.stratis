@@ -139,7 +139,7 @@ storePurchaseHandle = _this spawn
 							[_itemText] call _showInsufficientSpaceError;
 						};
 					}
-				} forEach (call throwputArray + call nadeArray);
+				} forEach (call ssthrowputArray);
 			};
 
 			if (isNil "_price") then
