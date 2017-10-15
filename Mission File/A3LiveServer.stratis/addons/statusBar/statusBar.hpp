@@ -22,7 +22,7 @@ class RscWastelandStatusBar
                       colorText[] = {1, 1, 1, 1};
                       colorBackground[]={0,0,0,0};
                       sizeEx = 0.4;
-                      font = "PuristaSemibold";
+                      font = "RobotoCondensedBold";
                       text = "addons\statusbar\StatusBarBackground.paa";
               };
       };
@@ -37,7 +37,7 @@ class RscWastelandStatusBar
                         w = 1.35;
                         h = 0.06;
                         shadow = 2;
-                        font = "PuristaSemibold";
+                        font = "RobotoCondensedBold";
                         size = 0.035;
                         type = 13;
 						            style = 2;
@@ -47,7 +47,7 @@ class RscWastelandStatusBar
                         {
                                 align="center";
                                 color = "#ffffff";
-                                font = "PuristaSemibold";
+                                font = "RobotoCondensedBold";
                         };
                 };
         };
