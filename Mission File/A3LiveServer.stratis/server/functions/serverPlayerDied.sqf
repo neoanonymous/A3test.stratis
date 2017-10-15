@@ -13,6 +13,17 @@ params [["_unit",objNull,[objNull]], "", "", ["_deathCause",[],[[]]]]; // _unit,
 _unit call A3W_fnc_setItemCleanup;
 _unit setVariable ["A3W_deathCause_local", _deathCause];
 
+// Make NPCs drop Cash
+if (!isPlayer _unit) then
+{
+	_Drop = ["A3W_aidropcash", 15000] call getPublicVar;
+	_item = createVehicle ["Land_Money_F", getPosATL _unit, [], 1, "None"];
+	_item setDir random 360;
+	_item setVariable ["cmoney", 1 + floor random _Drop, true];
+	_item setVariable ["owner", "world", true];
+
+};
+
 private _killer = (_this select [0,3]) call A3W_fnc_registerKillScore;
 
 // Remove player save on death
