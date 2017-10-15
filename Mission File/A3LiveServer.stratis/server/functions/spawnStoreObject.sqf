@@ -118,7 +118,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 		// HELICOPTERS
 		if (isNil "_itemEntry") then
 		{
-			_results = (call helicoptersArray) select {_x select [1,999] isEqualTo _itemEntrySent};
+			_results = (call helicoptersArray + call attackHelicoptersArray) select {_x select [1,999] isEqualTo _itemEntrySent};
 
 			if (count _results > 0) then
 			{
@@ -130,7 +130,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 		// AIRPLANES
 		if (isNil "_itemEntry") then
 		{
-			_results = (call planesArray) select {_x select [1,999] isEqualTo _itemEntrySent};
+			_results = (call planesArray + call uavPlanesArray) select {_x select [1,999] isEqualTo _itemEntrySent};
 
 			if (count _results > 0) then
 			{
@@ -169,7 +169,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 		// HELICOPTERS
 		if (isNil "_itemEntry") then
 		{
-			_results = (call helicoptersArray) select {_x select [1,999] isEqualTo _itemEntrySent};
+			_results = (call helicoptersArray + call attackHelicoptersArray) select {_x select [1,999] isEqualTo _itemEntrySent};
 
 			if (count _results > 0) then
 			{
@@ -181,7 +181,7 @@ if (_key != "" && isPlayer _player && {_isGenStore || _isGunStore || _isVehStore
 		// AIRPLANES
 		if (isNil "_itemEntry") then
 		{
-			_results = (call planesArray) select {_x select [1,999] isEqualTo _itemEntrySent};
+			_results = (call planesArray + call uavPlanesArray) select {_x select [1,999] isEqualTo _itemEntrySent};
 
 			if (count _results > 0) then
 			{
