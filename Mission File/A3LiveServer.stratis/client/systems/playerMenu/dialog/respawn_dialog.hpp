@@ -317,8 +317,8 @@ class RespawnSelectionDialog
 		class RspnKillfeedButton: RspnButton
 		{
 			idc = -1;
-			text = "VA";
-			onButtonClick = "_this call vaforall; ";
+			text = "Exit";
+			onButtonClick = "closeDialog 0";
 
 			x = RspnKillfeedButton_X;
 			y = RspnLobbyButton_Y;
