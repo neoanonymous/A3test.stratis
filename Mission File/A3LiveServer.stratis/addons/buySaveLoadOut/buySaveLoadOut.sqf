@@ -120,12 +120,12 @@ _disallowedItems = // this could be ANY carried/equipped/wearable item!
 	// "optic_LRPS_tna_F", // LRPS (Tropic)
 	// "optic_MRCO", // MRCO
 	// "optic_MRD", // MRD
-	"optic_Nightstalker", // Nightstalker
+	//"optic_Nightstalker", // Nightstalker
 	// "optic_NVS", // NVS
 	// "optic_SOS", // MOS
 	// "optic_SOS_khk_F", // MOS (Khaki)
-	"optic_tws", // TWS
-	"optic_tws_mg" // TWS MG
+	//"optic_tws", // TWS
+	//"optic_tws_mg" // TWS MG
 	// "optic_Yorris", // Yorris J2
 ];
 
@@ -138,7 +138,7 @@ _doWhat = _this select 3;
 if (_doWhat == "SAVE") then
 {
 	private ["_playerMoney", "_text", "_saveLoadOut"];
-	_playerMoney = player getVariable ["cmoney", 0];
+	_playerMoney = player getVariable ["bmoney", 0];
 	if (_savePrice > _playerMoney) exitWith
 	{
 		_text = format ["Saving Your Load Out Costs $%1, You Do Not Have Enough Carried Money!",_savePrice];
@@ -171,8 +171,8 @@ if (_doWhat == "SAVE") then
 	{
 		[player, [missionnamespace, "savedLoadOut"]] call bis_fnc_saveInventory;	
 		player setVariable ["currentLoadOut",true];
-		_playerMoney = player getVariable ["cmoney", 0];
-		player setVariable ["cmoney",(_playerMoney - _savePrice),true];
+		_playerMoney = player getVariable ["bmoney", 0];
+		player setVariable ["bmoney",(_playerMoney - _savePrice),true];
 		[] spawn fn_savePlayerData;
 		_text = format ["Load Out Save Has Been Successful, Which Cost You $%1.",_savePrice];
 		[_text, 5] call mf_notify_client;
@@ -182,7 +182,7 @@ if (_doWhat == "SAVE") then
 if (_doWhat == "BUY") then
 {
 	private ["_playerMoney", "_text", "_loadOut", "_loadOutAlreadyRepurchased", "_repurchaseLoadOut"];
-	_loadOutAlreadyRepurchased = player getVariable ["loadOutPurchased",false];
+	//_loadOutAlreadyRepurchased = player getVariable ["loadOutPurchased",false];
 	_loadOutCurrentlyPurchasing = player getVariable ["loadOutPurchasing",false];
 	_loadOut = player getVariable ["currentLoadOut",false];
 	if (!_loadOut) exitWith
@@ -191,12 +191,12 @@ if (_doWhat == "BUY") then
 		[_text, 5] call mf_notify_client;
 	};
 	if (_loadOutCurrentlyPurchasing) exitWith {};
-	if (_loadOutAlreadyRepurchased) exitWith
+	/*if (_loadOutAlreadyRepurchased) exitWith
 	{
 		_text = "You Can Only Repurchase One Load Out Per Respawn.";
 		[_text, 5] call mf_notify_client;
-	};
-	_playerMoney = player getVariable ["cmoney", 0];
+	};*/
+	_playerMoney = player getVariable ["bmoney", 0];
 	uiSleep 0.1;
 	if (_repurchasePrice > _playerMoney) exitWith
 	{
@@ -243,7 +243,7 @@ if (_doWhat == "BUY") then
 			_text = "You Must Stay Completely Naked And Unarmed With No Items Whilst The Store Owner Is Collecting Your Load Out... Exiting!";
 			[_text, 5] call mf_notify_client;
 		};
-		_playerMoney = player getVariable ["cmoney", 0];
+		_playerMoney = player getVariable ["bmoney", 0];
 		if (_playerMoney < _repurchasePrice) exitWith
 		{
 			_text = format ["You Dropped Too Much Money And Are Unable To Pay For The Load Out... Exiting!",_repurchaseMaxDistance];
@@ -255,8 +255,8 @@ if (_doWhat == "BUY") then
 	if (_equipGear) then
 	{
 		[player, [missionnamespace, "savedLoadOut"]] call bis_fnc_loadInventory;
-		_playerMoney = player getVariable ["cmoney", 0];
-		player setVariable ["cmoney",(_playerMoney - _repurchasePrice),true];
+		_playerMoney = player getVariable ["bmoney", 0];
+		player setVariable ["bmoney",(_playerMoney - _repurchasePrice),true];
 		_text = "Your Last Load Out Has Been Repurchased.";
 		[_text, 5] call mf_notify_client;
 		uiSleep 1;

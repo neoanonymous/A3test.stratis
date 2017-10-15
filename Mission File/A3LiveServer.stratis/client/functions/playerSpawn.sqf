@@ -58,7 +58,7 @@ if (!isNil "pvar_teamSwitchList" && playerSide in [BLUFOR,OPFOR]) then
 };
 
 // Only go through respawn dialog if no data from the player save system
-if (isNil "playerData_alive" || !isNil "playerData_resetPos") then
+/*if (isNil "playerData_alive" || !isNil "playerData_resetPos") then
 {
 	[player, "AmovPknlMstpSnonWnonDnon"] call switchMoveGlobal;
 	
@@ -74,7 +74,7 @@ if (isNil "playerData_alive" || !isNil "playerData_resetPos") then
 	{
 		[] spawn fn_savePlayerData;
 	};
-};
+};*/
 
 playerData_alive = nil;
 playerData_resetPos = nil;

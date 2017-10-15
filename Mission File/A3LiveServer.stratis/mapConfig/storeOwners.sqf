@@ -23,6 +23,7 @@ storeOwnerConfig = compileFinal str
 	
 	//SS
 	["spawnshop1", -1, [], []],
+	["spawnshop2", -1, [], []],
 	//SS
 
 	["GunStore1", -1, [], []],

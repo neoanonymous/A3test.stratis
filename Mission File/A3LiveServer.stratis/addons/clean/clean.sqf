@@ -54,7 +54,7 @@ _isHidden = compileFinal "
 
 deleteManagerPublic = TRUE;						// To terminate script via debug console
 _checkPlayerCount = FALSE;						// dynamic sleep. Set TRUE to have sleep automatically adjust based on # of players.
-_checkFrequencyDefault = 300;					// sleep default
+_checkFrequencyDefault = 60;					// sleep default
 _checkFrequencyAccelerated = 60;				// sleep accelerated
 _playerThreshold = 40;							// How many players before accelerated cycle kicks in? DEF 40
 

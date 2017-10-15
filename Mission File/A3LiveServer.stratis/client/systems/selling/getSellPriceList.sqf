@@ -12,7 +12,7 @@
 
 #define GET_HALF_PRICE(PRICE) ((ceil (((PRICE) / 2) / 5)) * 5)
 
-private ["_obj", "_sellValue", "_objItems", "_objMags", "_objWeapons", "_weaponArray", "_class", "_container", "_allStoreMagazines", "_allGunStoreFirearms", "_allStoreItems", "_weaponEntry", "_weaponClass", "_weaponQty", "_weaponCfg", "_weaponCfgModel", "_masterCfg", "_found", "_cfgItems", "_allObjItems", "_item", "_itemClass", "_itemQty", "_itemValue", "_itemQtyArr", "_cfgCategory", "_magFullAmmo", "_magFullPrice", "_magValue", "_itemName"];
+private ["_obj", "_sellValue", "_objItems", "_objMags", "_objWeapons", "_weaponArray", "_class", "_container", "_allStoreMagazines", "_allGunStoreFirearms", "_allStoreItems", "_weaponEntry", "_weaponClass", "_weaponQty", "_weaponCfg", "_weaponCfgModel", "_masterCfg", "_found", "_cfgItems", "_allObjItems", "_item", "_itemClass", "_itemQty", "_itemValue", "_itemQtyArr", "_cfgCategory", "_magFullAmmo", "_magFullPrice", "_magValue", "_itemName", "_ssthrowputArray"];
 
 _obj = _this;
 if (isNull _obj) exitWith { [] };
@@ -58,6 +58,7 @@ _objWeapons = [];
 } forEach everyContainer _obj;
 
 _allStoreMagazines = call allStoreMagazines;
+_ssthrowputArray = call ssthrowputArray
 _allGunStoreFirearms = call allGunStoreFirearms;
 _allStoreItems = call allRegularStoreItems + call allStoreGear;
 
@@ -153,6 +154,13 @@ _allObjItems = [];
 					_itemValue = _x select 2;
 				};
 			} forEach _allStoreMagazines;
+			
+			{
+				if (_x select 1 == _itemClass) exitWith
+				{
+					_itemValue = _x select 2;
+				};
+			} forEach _ssthrowputArray;
 
 			{
 				_magValue = GET_HALF_PRICE(_itemValue * (_x / _magFullAmmo)); // Get selling price relative to ammo count
@@ -169,6 +177,13 @@ _allObjItems = [];
 					_itemValue = GET_HALF_PRICE((_x select 2) * _itemQty);
 				};
 			} forEach _allStoreItems;
+			
+			{
+				if (_x select 1 == _itemClass) exitWith
+				{
+					_itemValue = GET_HALF_PRICE((_x select 2) * _itemQty);
+				};
+			} forEach _ssthrowputArray;
 
 			_sellValue = _sellValue + _itemValue;
 		};
