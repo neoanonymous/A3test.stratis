@@ -59,7 +59,15 @@ if (!isNil "_owner") then
 				{
 					_heliButton ctrlEnable false;
 				};
+				case "attackHelicopters":
+				{
+					_heliButton ctrlEnable false;
+				};
 				case "planes":
+				{
+					_planeButton ctrlEnable false;
+				};
+				case "uavPlanes":
 				{
 					_planeButton ctrlEnable false;
 				};
