@@ -53,16 +53,13 @@ if (hasInterface) then
 		};
 		case (["WalMart", _npcName] call _startsWith):
 		{
-			_npc addAction ["<img image='client\icons\store.paa'/> Open General Store", "client\systems\generalStore\loadGenStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
-			_npc addAction ["<img image='client\icons\store.paa'/> Open Gun Store", "client\systems\gunStore\loadgunStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
-			_npc addAction ["<img image='client\icons\store.paa'/> Open Vehicle Store", "client\systems\vehicleStore\loadVehicleStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
+			_npc addAction ["<img image='client\icons\store.paa'/> Open WALMART", "client\systems\walmart\loadgunStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
 			_npc addAction ["<img image='addons\buySaveLoadOut\saveLoadOut.paa'/> Save Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","SAVE", 1, false, true, "", STORE_ACTION_CONDITION];
 			_npc addAction ["<img image='addons\buySaveLoadOut\buyLoadOut.paa'/> Buy Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","BUY", 1, false, true, "", STORE_ACTION_CONDITION  + " && (player getVariable ['currentLoadOut',false])"];
 		};
 		case (["spawnshop", _npcName] call _startsWith):
 		{
-			_npc addAction ["<img image='client\icons\store.paa'/> Open Gun Store", "client\systems\spawnshop1\loadgunStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
-			_npc addAction ["<img image='client\icons\store.paa'/> Open General Store", "client\systems\spawnshop2\loadgenStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
+			_npc addAction ["<img image='client\icons\store.paa'/> Open Spawn Shop", "client\systems\spawnshop1\loadgunStore.sqf", [], 1, true, true, "", STORE_ACTION_CONDITION];
 			_npc addAction ["<img image='addons\buySaveLoadOut\saveLoadOut.paa'/> Save Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","SAVE", 1, false, true, "", STORE_ACTION_CONDITION];
 			_npc addAction ["<img image='addons\buySaveLoadOut\buyLoadOut.paa'/> Buy Load Out</t>", "addons\buySaveLoadOut\buySaveLoadOut.sqf","BUY", 1, false, true, "", STORE_ACTION_CONDITION  + " && (player getVariable ['currentLoadOut',false])"];
 		};
