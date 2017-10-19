@@ -35,6 +35,7 @@ MoneyMissions =
 [
 	["mission_Hackers", 0.10],
 	["mission_MoneyShipment", 1],
+	["mission_MoneyShipment1", 1],
 	["mission_SunkenTreasure", 1]
 ];
 
