@@ -488,7 +488,8 @@ switch (true) do
 		{
 			_mags =
 			[
-				["120Rnd_CMFlareMagazine", [-1]]
+				["120Rnd_CMFlareMagazine", [-1]],
+				["Laserbatteries", [0]]
 			];
 			case "greyhawkBomber": { _pylons = ["PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_Bomb_04_F"] };
 			case "greyhawkCluster": { _pylons = ["PylonMissile_1Rnd_BombCluster_01_F","PylonMissile_1Rnd_BombCluster_01_F"] };
@@ -518,7 +519,8 @@ switch (true) do
 	{
 		_mags =
 		[
-			["120Rnd_CMFlareMagazine", [-1]]
+			["120Rnd_CMFlareMagazine", [-1]],
+			["Laserbatteries", [0]]
 		];
 		switch (_variant) do
 		{
