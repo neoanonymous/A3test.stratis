@@ -35,4 +35,4 @@ _ammoText ctrlSetText "";
 		_price = _x select 2;
 		_ammoText ctrlSetText format ["Price: $%1", [_price] call fn_numbersText];
 	};
-} forEach (call ammoArray);
+} forEach (call ssammoArray);

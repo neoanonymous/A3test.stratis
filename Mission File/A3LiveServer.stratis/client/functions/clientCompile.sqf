@@ -104,7 +104,7 @@ loadGunStore = "client\systems\gunStore\loadGunStore.sqf" call mf_compile;
 loadGunStore1 = "client\systems\spawnshop1\loadGunStore.sqf" call mf_compile; //SS1
 loadGeneralStore2 = "client\systems\spawnshop2\loadGenStore.sqf" call mf_compile; //SS2
 populateGunStore1 = "client\systems\spawnshop1\populateGunStore.sqf" call mf_compile; //SS1
-populateGeneralStore2 = "client\systems\spawnshop2\populateGenStore.sqf" call mf_compile; //SS2
+populateGeneralStore2 = "client\systems\spawnshop1\populateGenStore.sqf" call mf_compile; //SS2
 //spawn shops
 loadScoreboard = "client\systems\scoreboard\loadScoreboard.sqf" call mf_compile;
 loadVehicleStore = "client\systems\vehicleStore\loadVehicleStore.sqf" call mf_compile;

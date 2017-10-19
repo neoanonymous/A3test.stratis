@@ -122,7 +122,7 @@ class spawnshop1
 		class AmmoList: w_RscList
 		{
 			idc = gunshop_ammo_list;
-			onLBSelChanged = "[] execVM 'client\systems\gunStore\ammoInfo.sqf'";
+			onLBSelChanged = "[] execVM 'client\systems\spawnshop1\ammoInfo.sqf'";
 			sizeEx = 0.04 * TEXT_SCALE;
 			rowHeight = 0.05 * TEXT_SCALE;
 
@@ -135,7 +135,7 @@ class spawnshop1
 		class BuyGun: w_RscButton
 		{
 			idc = -1;
-			action = "[0] execVM 'client\systems\gunStore\buyGuns.sqf'";
+			action = "[0] execVM 'client\systems\spawnshop1\buyGuns.sqf'";
 			text = "Buy";
 			sizeEx = GunStoreButton_textSize;
 
@@ -148,7 +148,7 @@ class spawnshop1
 		class BuyAmmo: w_RscButton
 		{
 			idc = gunshop_but_butammo;
-			action = "[0] execVM 'client\systems\gunStore\buyAmmo.sqf'";
+			action = "[0] execVM 'client\systems\spawnshop1\buyAmmo.sqf'";
 			text = "Buy";
 			sizeEx = GunStoreButton_textSize;
 
@@ -367,6 +367,32 @@ class spawnshop1
 			y = GunStoreMainBG_Y + (0.59 * SZ_SCALE);
 			w = 0.096 * SZ_SCALE;
 			h = 0.040 * SZ_SCALE;
+		};
+		
+		class GunStoreOpen: w_RscButton
+		{
+			idc = -1;
+			action = "closeDialog 0; [0] execVM 'client\systems\spawnshop1\loadgunStore.sqf';";
+			text = "Gun Store";
+			sizeEx = GunStoreButton_textSize;
+
+			x = GunStoreMainBG_X + (0.0 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (-0.05 * SZ_SCALE);
+			w = 0.350 * SZ_SCALE;
+			h = 0.045 * SZ_SCALE;
+		};
+		
+		class GenStoreOpen: w_RscButton
+		{
+			idc = -1;
+			action = "closeDialog 0; [0] execVM 'client\systems\spawnshop1\loadGenStore.sqf';";
+			text = "General Store";
+			sizeEx = GunStoreButton_textSize;
+
+			x = GunStoreMainBG_X + (0.38 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (-0.05 * SZ_SCALE);
+			w = 0.350 * SZ_SCALE;
+			h = 0.045 * SZ_SCALE;
 		};
 	};
 };

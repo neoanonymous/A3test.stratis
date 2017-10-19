@@ -29,7 +29,7 @@ storePurchaseHandle = _this spawn
 	_dialog = findDisplay spawnshop1_DIALOG;
 	_ammoList = _dialog displayCtrl gunshop_ammo_list;
 	_playerMoneyText = _Dialog displayCtrl gunshop_money;
-	_playerMoney = player getVariable ["cmoney", 0];
+	_playerMoney = player getVariable ["bmoney", 0];
 
 	_itemIndex = lbCurSel gunshop_ammo_list;
 	_itemText = _ammoList lbText _itemIndex;
@@ -78,14 +78,14 @@ storePurchaseHandle = _this spawn
 						[_itemText] call _showInsufficientSpaceError;
 					};
 				}
-			} forEach (call ammoArray + call ssammoArray);
+			} forEach (call ssammoArray);
 		};
 	};
 
 	if (!isNil "_price" && {_price > -1}) then
 	{
-		player setVariable ["cmoney", _playerMoney - _price, true];
-		_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+		player setVariable ["bmoney", _playerMoney - _price, true];
+		_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["bmoney", 0]] call fn_numbersText];
 		hint "Purchase successful!";
 		playSound "FD_Finish_F";
 	};

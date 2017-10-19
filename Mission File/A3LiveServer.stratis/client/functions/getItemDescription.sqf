@@ -27,25 +27,16 @@ if (isNil "_itemEntry") then
 };
 
 if (isNil "_itemEntry") then
-{
+{	
+	{
 	{
 		if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 		{
 			_itemEntry = _x;
 			_parentCfg = "CfgMagazines";
 		};
-	} forEach (call throwputArray);
-};
-
-if (isNil "_itemEntry") then
-{
-	{
-		if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
-		{
-			_itemEntry = _x;
-			_parentCfg = "CfgMagazines";
-		};
-	} forEach (call ssthrowputArray);
+	} forEach (call _x);
+	} forEach [throwputArray, ssthrowArray];
 };
 
 if (isNil "_itemEntry") then

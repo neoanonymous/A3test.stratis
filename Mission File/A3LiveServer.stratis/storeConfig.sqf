@@ -573,10 +573,10 @@ headArray = compileFinal str
 	["Bandana (Surfer, Black)", "H_Bandanna_surfer_blk", 10, "hat"],
 	["Bandana (Surfer, Green)", "H_Bandanna_surfer_grn", 10, "hat"],
 	["Bandana (Woodland)", "H_Bandanna_camo", 10, "hat"],
-	// ["Bandanna Mask (Black)", "H_BandMask_blk", 10, "hat"],
-	// ["Bandanna Mask (Demon)", "H_BandMask_demon", 10, "hat"],
-	// ["Bandanna Mask (Khaki)", "H_BandMask_khk", 10, "hat"],
-	// ["Bandanna Mask (Reaper)", "H_BandMask_reaper", 10, "hat"],
+	["Bandanna Mask (Black)", "H_BandMask_blk", 10, "hat"],
+	["Bandanna Mask (Demon)", "H_BandMask_demon", 10, "hat"],
+	["Bandanna Mask (Khaki)", "H_BandMask_khk", 10, "hat"],
+	["Bandanna Mask (Reaper)", "H_BandMask_reaper", 10, "hat"],
 	["Beanie (Black)", "H_Watchcap_blk", 10, "hat"],
 	["Beanie (Brown)", "H_Watchcap_cbr", 10, "hat"],
 	["Beanie (Khaki)", "H_Watchcap_khk", 10, "hat"],
@@ -585,16 +585,16 @@ headArray = compileFinal str
 	["Beret (Black)", "H_Beret_blk", 10, "hat"],
 	["Beret (Colonel)", "H_Beret_Colonel", 10, "hat"],
 	["Beret (NATO)", "H_Beret_02", 10, "hat"],
-	// ["Beret (Green)", "H_Beret_grn", 10, "hat"],
-	// ["Beret (Police)", "H_Beret_blk_POLICE", 10, "hat"],
-	// ["Beret (Red)", "H_Beret_red", 10, "hat"],
-	// ["Beret (SAS)", "H_Beret_brn_SF", 10, "hat"],
-	// ["Beret (SF)", "H_Beret_grn_SF", 10, "hat"],
-	// ["Beret (RED)", "H_Beret_ocamo", 10, "hat"],
-	// ["Black Turban", "H_TurbanO_blk", 50, "hat"],
-	// ["Booniehat (Dirty)", "H_Booniehat_dirty", 10, "hat"],
-	// ["Booniehat (Green)", "H_Booniehat_grn", 10, "hat"],
-	// ["Booniehat (Khaki)", "H_Booniehat_indp", 10, "hat"],
+	["Beret (Green)", "H_Beret_grn", 10, "hat"],
+	["Beret (Police)", "H_Beret_blk_POLICE", 10, "hat"],
+	["Beret (Red)", "H_Beret_red", 10, "hat"],
+	["Beret (SAS)", "H_Beret_brn_SF", 10, "hat"],
+	["Beret (SF)", "H_Beret_grn_SF", 10, "hat"],
+	["Beret (RED)", "H_Beret_ocamo", 10, "hat"],
+	["Black Turban", "H_TurbanO_blk", 50, "hat"],
+	["Booniehat (Dirty)", "H_Booniehat_dirty", 10, "hat"],
+	["Booniehat (Green)", "H_Booniehat_grn", 10, "hat"],
+	["Booniehat (Khaki)", "H_Booniehat_indp", 10, "hat"],
 	["Booniehat (AAF)", "H_Booniehat_dgtl", 10, "hat"],
 	["Booniehat (Headset)", "H_Booniehat_khk_hs", 10, "hat"],
 	["Booniehat (Khaki)", "H_Booniehat_khk", 10, "hat"],
@@ -628,8 +628,8 @@ headArray = compileFinal str
 	["Shemag (Olive)", "H_Shemag_olive", 25, "hat"],
 	["Shemag (Olive, Headset)", "H_Shemag_olive_hs", 25, "hat"],
 	["Shemag (Tan)", "H_ShemagOpen_tan", 25, "hat"],
-	["Shemag (White)", "H_ShemagOpen_khk", 25, "hat"]
-	/* ["Shemag mask (Tan)", "H_Shemag_tan", 25, "hat"],
+	["Shemag (White)", "H_ShemagOpen_khk", 25, "hat"],
+	["Shemag mask (Tan)", "H_Shemag_tan", 25, "hat"],
 	["Racing Helmet (Black)", "H_RacingHelmet_1_black_F", 25, "hat"],
 	["Racing Helmet (Blue)", "H_RacingHelmet_1_blue_F", 25, "hat"],
 	["Racing Helmet (Green)", "H_RacingHelmet_1_green_F", 25, "hat"],
@@ -640,7 +640,7 @@ headArray = compileFinal str
 	["Racing Helmet (Fuel)", "H_RacingHelmet_1_F", 25, "hat"],
 	["Racing Helmet (Bluking)", "H_RacingHelmet_2_F", 25, "hat"],
 	["Racing Helmet (Redstone)", "H_RacingHelmet_3_F", 25, "hat"],
-	["Racing Helmet (Vrana)", "H_RacingHelmet_4_F", 25, "hat"]*/
+	["Racing Helmet (Vrana)", "H_RacingHelmet_4_F", 25, "hat"]
 ];
 
 uniformArray = compileFinal str
@@ -876,7 +876,17 @@ genItemArray = compileFinal str
 	["Chemlight (Green)", "Chemlight_green", 25, "mag"],
 	["Chemlight (Yellow)", "Chemlight_yellow", 25, "mag"],
 	["Chemlight (Red)", "Chemlight_red", 25, "mag"],
+	["Wireless Earpiece", "G_WirelessEarpiece_F", 10, "gogg"],
+	
+	//Added not included in A3W
+	["Map", "ItemMap", 5, "item"],
+	["Compass", "ItemCompass", 5, "item"],
+	["Watch", "ItemWatch", 5, "item"],
+	["Radio", "ItemRadio", 5, "item"]
+];
 
+faceWearArray = compileFinal str
+[
 	["Stealth Balaclava (Black)", "G_Balaclava_TI_blk_F", 200, "gogg"],
 	["Stealth Balaclava (Black, Goggles)", "G_Balaclava_TI_G_blk_F", 250, "gogg"],
 	["Stealth Balaclava (Green)", "G_Balaclava_TI_tna_F", 200, "gogg"],
@@ -921,7 +931,7 @@ genItemArray = compileFinal str
 	["Tinted Spectacles", "G_Spectacles_Tinted", 10, "gogg"]
 ];
 
-allStoreMagazines = compileFinal str (call ammoArray + call ssammoArray + call throwputArray + call ssthrowputArray + call genItemArray);
+allStoreMagazines = compileFinal str (call ammoArray + call ssammoArray + call throwputArray + call ssthrowputArray + call genItemArray + call faceWearArray);
 allRegularStoreItems = compileFinal str (call allGunStoreFirearms + call allStoreMagazines);
 allStoreGear = compileFinal str (call headArray + call uniformArray + call vestArray + call backpackArray);
 access0Array = compileFinal str (call accessoriesArray);
@@ -1124,7 +1134,7 @@ attackHelicoptersArray = compileFinal str
 	["AH-99 Blackfoot", "B_Heli_Attack_01_dynamicLoadout_F", 150000, "vehicle", "HIDDEN"], // RAH-66 with gunner
 	["Mi-48 Kajman", "O_Heli_Attack_02_dynamicLoadout_F", 150000, "vehicle"], // Mi-28 with gunner 
 	
-	["MQ-12 Falcon UAV", "B_T_UAV_03_F", 250000, "vehicle"] // Do NOT use "B_T_UAV_03_dynamicLoadout_F" (doesn't support ASRAAM pylons)
+	["MQ-12 Falcon UAV", "B_T_UAV_03_F", 650000, "vehicle"] // Do NOT use "B_T_UAV_03_dynamicLoadout_F" (doesn't support ASRAAM pylons)
 ];
 
 
@@ -1137,14 +1147,14 @@ planesArray = compileFinal str
 
 	["A-149 Gryphon", "I_Plane_Fighter_04_F", 755000, "vehicle"],
 
-	["F/A-181 Black Wasp (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 1000000, "vehicle"], // no missiles or bombs
-	["F/A-181 Black Wasp", "B_Plane_Fighter_01_F", 1000000, "vehicle"],
+	["F/A-181 Black Wasp (Gun-Only)", "B_Plane_Fighter_01_Stealth_F", 800000, "vehicle"], // no missiles or bombs
+	["F/A-181 Black Wasp", "B_Plane_Fighter_01_F", 2000000, "vehicle"],
 
-	["To-201 Shikra (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 1150000, "vehicle"], // no missiles or bombs
-	["To-201 Shikra", "O_Plane_Fighter_02_F", 1500000, "vehicle"],
+	["To-201 Shikra (Gun-Only)", "O_Plane_Fighter_02_Stealth_F", 2150000, "vehicle"], // no missiles or bombs
+	["To-201 Shikra", "O_Plane_Fighter_02_F", 2500000, "vehicle"],
 
-	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 1000000, "vehicle"],
-	["A-164 Wipeout (OP)", "B_Plane_CAS_01_dynamicLoadout_F", 1225000, "vehicle", "variant_WipeoutOP"],
+	["A-164 Wipeout CAS", "B_Plane_CAS_01_dynamicLoadout_F", 2000000, "vehicle"],
+	["A-164 Wipeout (OP)", "B_Plane_CAS_01_dynamicLoadout_F", 2225000, "vehicle", "variant_WipeoutOP"],
 	["To-199 Neophron CAS", "O_Plane_CAS_02_dynamicLoadout_F", 1005000, "vehicle"],
 
 	["V-44 X Blackfish (Infantry)", "B_T_VTOL_01_infantry_F", 60000, "vehicle"],
@@ -1154,11 +1164,11 @@ planesArray = compileFinal str
 
 uavPlanesArray = compileFinal str
 [
-	["KH-3A Fenghuang Missile UAV", "O_T_UAV_04_CAS_F", 350000, "vehicle"],
+	["KH-3A Fenghuang Missile UAV", "O_T_UAV_04_CAS_F", 650000, "vehicle"],
 
-	["MQ4A Greyhawk Missile UAV", "B_UAV_02_dynamicLoadout_F", 400000, "vehicle", "variant_greyhawkMissile"],
-	["K40 Ababil-3 Missile UAV", "O_UAV_02_dynamicLoadout_F", 350000, "vehicle", "variant_greyhawkMissile"],
-	["K40 Ababil-3 Missile UAV", "I_UAV_02_dynamicLoadout_F", 350000, "vehicle", "variant_greyhawkMissile"],
+	["MQ4A Greyhawk Missile UAV", "B_UAV_02_dynamicLoadout_F", 650000, "vehicle", "variant_greyhawkMissile"],
+	["K40 Ababil-3 Missile UAV", "O_UAV_02_dynamicLoadout_F", 650000, "vehicle", "variant_greyhawkMissile"],
+	["K40 Ababil-3 Missile UAV", "I_UAV_02_dynamicLoadout_F", 650000, "vehicle", "variant_greyhawkMissile"],
 
 	["MQ4A Greyhawk Bomber UAV", "B_UAV_02_dynamicLoadout_F", 250000, "vehicle", "variant_greyhawkBomber"], // Bomber UAVs are a lot harder to use, hence why they are cheaper than Missile ones
 	["K40 Ababil-3 Bomber UAV", "O_UAV_02_dynamicLoadout_F", 250000, "vehicle", "variant_greyhawkBomber"],
@@ -1168,7 +1178,7 @@ uavPlanesArray = compileFinal str
 	["K40 Ababil-3 Cluster UAV", "O_UAV_02_dynamicLoadout_F", 250000, "vehicle", "variant_greyhawkCluster"],
 	["K40 Ababil-3 Cluster UAV", "I_UAV_02_dynamicLoadout_F", 250000, "vehicle", "variant_greyhawkCluster"],
 
-	["UCAV Sentinel Missile", "B_UAV_05_F", 350000, "vehicle", "variant_sentinelMissile"],
+	["UCAV Sentinel Missile", "B_UAV_05_F", 650000, "vehicle", "variant_sentinelMissile"],
 	["UCAV Sentinel Bomber", "B_UAV_05_F", 250000, "vehicle", "variant_sentinelBomber"],
 	["UCAV Sentinel Cluster", "B_UAV_05_F", 250000, "vehicle", "variant_sentinelCluster"]
 ];

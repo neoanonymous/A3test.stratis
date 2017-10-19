@@ -1,16 +1,16 @@
 // ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
-#include "genstoreDefines.sqf"
+#include "spawnshop2Defines.sqf"
 
 #define GenStoreButton_textSize (0.04 * TEXT_SCALE)
 
-class genstored
+class spawnshop2
 {
-	idd = genstore_DIALOG;
+	idd = spawnshop2_DIALOG;
 	movingEnable = true;
 	enableSimulation = true;
-	onLoad = "[[0], populateGeneralStore] execFSM 'call.fsm'";
+	onLoad = "[[0], populateGeneralStore2] execFSM 'call.fsm'";
 
 	class ControlsBackground
 	{
@@ -123,7 +123,7 @@ class genstored
 		class SellList: w_RscList
 		{
 			idc = genstore_sell_list;
-			onLBSelChanged = "[] execVM 'client\systems\generalStore\sellInfo.sqf'";
+			onLBSelChanged = "[] execVM 'client\systems\spawnshop1\sellInfo.sqf'";
 			sizeEx = 0.04 * TEXT_SCALE;
 			rowHeight = 0.05 * TEXT_SCALE;
 
@@ -136,7 +136,7 @@ class genstored
 		class BuyItem: w_RscButton
 		{
 			idc = -1;
-			action = "[0] execVM 'client\systems\generalStore\buyItems.sqf'";
+			action = "[0] execVM 'client\systems\spawnshop1\buyItems.sqf'";
 			text = "Buy";
 			sizeEx = GenStoreButton_textSize;
 
@@ -149,7 +149,7 @@ class genstored
 		class SellItem: w_RscButton
 		{
 			idc = genstore_sell;
-			action = "[0] execVM 'client\systems\generalStore\sellItems.sqf'";
+			action = "[0] execVM 'client\systems\spawnshop1\sellItems.sqf'";
 			text = "Sell";
 			sizeEx = GenStoreButton_textSize;
 
@@ -162,7 +162,7 @@ class genstored
 		class StoreButton0: w_RscButton
 		{
 			idc = -1;
-			action = "[0] call populateGeneralStore";
+			action = "[0] call populateGeneralStore2";
 			text = "Headgear";
 			sizeEx = GenStoreButton_textSize;
 
@@ -175,7 +175,7 @@ class genstored
 		class StoreButton1: w_RscButton
 		{
 			idc = -1;
-			action = "[1] call populateGeneralStore";
+			action = "[1] call populateGeneralStore2";
 			text = "Uniforms";
 			sizeEx = GenStoreButton_textSize;
 
@@ -188,7 +188,7 @@ class genstored
 		class StoreButton2: w_RscButton
 		{
 			idc = -1;
-			action = "[2] call populateGeneralStore";
+			action = "[2] call populateGeneralStore2";
 			text = "Vests";
 			sizeEx = GenStoreButton_textSize;
 
@@ -201,7 +201,7 @@ class genstored
 		class StoreButton3: w_RscButton
 		{
 			idc = -1;
-			action = "[3] call populateGeneralStore";
+			action = "[3] call populateGeneralStore2";
 			text = "Backpacks";
 			sizeEx = GenStoreButton_textSize;
 
@@ -237,10 +237,11 @@ class genstored
 			h = 0.020 * SZ_SCALE;
 		};
 
+
 		class StoreButton6: w_RscButton
 		{
 			idc = -1;
-			action = "[6] call populateGeneralStore";
+			action = "[6] call populateGeneralStore2";
 			text = "Supplies";
 			sizeEx = GenStoreButton_textSize;
 
@@ -249,20 +250,7 @@ class genstored
 			w = 0.1173 * SZ_SCALE;
 			h = 0.040 * SZ_SCALE;
 		};
-
-		class StoreButton7: w_RscButton
-		{
-			idc = -1;
-			action = "[7] call populateGeneralStore";
-			text = "Objects";
-			sizeEx = GenStoreButton_textSize;
-
-			x = GenStoreMainBG_X + (0.0167 * SZ_SCALE);
-			y = GenStoreMainBG_Y + (0.375 * SZ_SCALE);
-			w = 0.1173 * SZ_SCALE;
-			h = 0.040 * SZ_SCALE;
-		};
-
+		
 		class SellWeapon: w_RscButton
 		{
 			idc = -1;
@@ -326,6 +314,32 @@ class genstored
 			y = GenStoreMainBG_Y + (0.59 * SZ_SCALE);
 			w = 0.096 * SZ_SCALE;
 			h = 0.040 * SZ_SCALE;
+		};
+		
+		class GunStoreOpen: w_RscButton
+		{
+			idc = -1;
+			action = "closeDialog 0; [0] execVM 'client\systems\spawnshop1\loadgunStore.sqf';";
+			text = "Gun Store";
+			sizeEx = GunStoreButton_textSize;
+
+			x = GunStoreMainBG_X + (0.0 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (-0.05 * SZ_SCALE);
+			w = 0.350 * SZ_SCALE;
+			h = 0.045 * SZ_SCALE;
+		};
+		
+		class GenStoreOpen: w_RscButton
+		{
+			idc = -1;
+			action = "closeDialog 0; [0] execVM 'client\systems\spawnshop1\loadGenStore.sqf';";
+			text = "General Store";
+			sizeEx = GunStoreButton_textSize;
+
+			x = GunStoreMainBG_X + (0.38 * SZ_SCALE);
+			y = GunStoreMainBG_Y + (-0.05 * SZ_SCALE);
+			w = 0.350 * SZ_SCALE;
+			h = 0.045 * SZ_SCALE;
 		};
 	};
 };

@@ -7,13 +7,13 @@
 //	@file Created: 20/11/2012 05:13
 //	@file Args:
 
-#include "dialog\genstoreDefines.sqf";
+#include "dialog\spawnshop2Defines.sqf";
 disableSerialization;
 private ["_switch", "_dialog", "_itemlist", "_itemlisttext", "_itemDesc", "_showPicture", "_itemsArray", "_playerSideNum", "_parentCfg", "_weapon", "_picture", "_listIndex", "_showItem", "_factionCfg", "_faction", "_isUniform", "_sideCfg", "_side"];
 _switch = _this select 0;
 
 // Grab access to the controls
-_dialog = findDisplay genstore_DIALOG;
+_dialog = findDisplay spawnshop2_DIALOG;
 _itemlist = _dialog displayCtrl genstore_item_list;
 _itemlisttext = _dialog displayCtrl genstore_item_TEXT;
 _itemDesc = _dialog displayCtrl genstore_item_desc;
@@ -78,11 +78,6 @@ switch(_switch) do
 		{
 			_itemsArray = [_itemsArray, { !((_x select 1) in _excludedItems) }] call BIS_fnc_conditionalSelect;
 		};
-	};
-	case 7:
-	{
-		_itemsArray = call genObjectsArray;
-		_showPicture = false;
 	};
 	default
 	{

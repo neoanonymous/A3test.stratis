@@ -34,12 +34,14 @@ if (isNil "_itemEntry") then
 if (isNil "_itemEntry") then
 {
 	{
+	{
 		if (_itemData == _x select 1) exitWith
 		{
 			_itemEntry = _x;
 			_parentCfg = "CfgMagazines";
 		};
-	} forEach (call throwputArray + call ssthrowArray);
+	} forEach (call _x);
+	} forEach [throwputArray, ssthrowArray];
 };
 
 if (isNil "_itemEntry") then
@@ -62,7 +64,7 @@ if (isNil "_itemEntry") then
 				};
 			};
 		} forEach (call _x)
-	} forEach [accessoriesArray, genItemArray, scopesArray, silencersArray];
+	} forEach [accessoriesArray, genItemArray, scopesArray, silencersArray, faceWearArray];
 };
 
 if (isNil "_itemEntry") then

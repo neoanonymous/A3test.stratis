@@ -9,7 +9,7 @@
 
 if (!isNil "storePurchaseHandle" && {typeName storePurchaseHandle == "SCRIPT"} && {!scriptDone storePurchaseHandle}) exitWith {hint "Please wait, your previous purchase is being processed"};
 
-#include "dialog\genstoreDefines.sqf";
+#include "dialog\spawnshop2Defines.sqf";
 
 #define PURCHASED_CRATE_TYPE_AMMO 60
 #define PURCHASED_CRATE_TYPE_WEAPON 61
@@ -23,11 +23,11 @@ storePurchaseHandle = _this spawn
 	private ["_playerMoney", "_size", "_price", "_dialog", "_itemlist", "_totalText", "_playerMoneyText", "_itemText", "_class", "_uniformClass", "_vestClass", "_backpackClass", "_itemClass", "_markerPos", "_obj", "_currentBinoc", "_confirmResult", "_successHint", "_hasNVG", "_requestKey"];
 
 	//Initialize Values
-	_playerMoney = player getVariable ["cmoney", 0];
+	_playerMoney = player getVariable ["bmoney", 0];
 	_successHint = true;
 
 	// Grab access to the controls
-	_dialog = findDisplay genstore_DIALOG;
+	_dialog = findDisplay spawnshop2_DIALOG;
 	_itemlist = _dialog displayCtrl genstore_item_list;
 	_totalText = _dialog displayCtrl genstore_total;
 	_playerMoneyText = _Dialog displayCtrl genstore_money;
@@ -442,7 +442,7 @@ storePurchaseHandle = _this spawn
 
 	if (!isNil "_price" && {_price > -1}) then
 	{
-		_playerMoney = player getVariable ["cmoney", 0];
+		_playerMoney = player getVariable ["bmoney", 0];
 
 		// Re-check for money after purchase
 		if (_price > _playerMoney) then
@@ -456,8 +456,8 @@ storePurchaseHandle = _this spawn
 		}
 		else
 		{
-			player setVariable ["cmoney", _playerMoney - _price, true];
-			_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+			player setVariable ["bmoney", _playerMoney - _price, true];
+			_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["bmoney", 0]] call fn_numbersText];
 			if (_successHint) then { hint "Purchase successful!" };
 			playSound "FD_Finish_F";
 		};

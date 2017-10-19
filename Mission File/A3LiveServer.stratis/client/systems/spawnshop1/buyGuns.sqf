@@ -33,7 +33,7 @@ storePurchaseHandle = _this spawn
 	_dialog = findDisplay spawnshop1_DIALOG;
 	_gunsList = _dialog displayCtrl gunshop_gun_list;
 	_playerMoneyText = _dialog displayCtrl gunshop_money;
-	_playerMoney = player getVariable ["cmoney", 0];
+	_playerMoney = player getVariable ["bmoney", 0];
 
 	_itemIndex = lbCurSel gunshop_gun_list;
 	_itemText = _gunsList lbText _itemIndex;
@@ -283,7 +283,7 @@ storePurchaseHandle = _this spawn
 
 	if (!isNil "_price" && {_price > -1}) then
 	{
-		_playerMoney = player getVariable ["cmoney", 0];
+		_playerMoney = player getVariable ["bmoney", 0];
 
 		// Re-check for money after purchase
 		if (_price > _playerMoney) then
@@ -297,8 +297,8 @@ storePurchaseHandle = _this spawn
 		}
 		else
 		{
-			player setVariable ["cmoney", _playerMoney - _price, true];
-			_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["cmoney", 0]] call fn_numbersText];
+			player setVariable ["bmoney", _playerMoney - _price, true];
+			_playerMoneyText ctrlSetText format ["Cash: $%1", [player getVariable ["bmoney", 0]] call fn_numbersText];
 			if (_successHint) then { hint "Purchase successful!" };
 			playSound "FD_Finish_F";
 		};
