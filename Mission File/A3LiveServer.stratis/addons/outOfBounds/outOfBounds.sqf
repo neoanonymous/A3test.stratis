@@ -64,8 +64,7 @@ _maxHeight = 1500; // 1500m height max default
 /*	------------------------------------------------------------------------------------------
 	DO NOT EDIT BELOW HERE!
 	------------------------------------------------------------------------------------------	*/
-
-if (isServer) then
+/*if (isServer) then
 {
 	_mapSizeSquare = getNumber (configfile >> "CfgWorlds" >> worldName >> "mapSize");
 	_mapSizeEllipse = sqrt ((_mapSizeSquare * _mapSizeSquare) + (_mapSizeSquare * _mapSizeSquare));
@@ -77,7 +76,7 @@ if (isServer) then
 	_mkrInBounds setMarkerBrush "BORDER";
 	_mkrInBounds setMarkerAlpha 1;
 	_mkrInBounds setMarkerSize [(_mapSizeEllipse / 2),(_mapSizeEllipse / 2)];
-};
+};*/
 
 if (hasInterface) then
 {
@@ -92,14 +91,14 @@ if (hasInterface) then
 			waitUntil {uiSleep 0.1; alive player && !playerSpawning && !respawnDialogActive};
 			if (alive player) then
 			{
-				_outOfBounds = !(player inArea "playableArea");
+				//_outOfBounds = !(player inArea "playableArea");
 				_outOfBoundsAltitude = (getPos player select 2 > _maxHeight);
-				if (((_outOfBounds) || (_outOfBoundsAltitude)) && (!_inLoop)) then
+				if ((_outOfBoundsAltitude) && (!_inLoop)) then
 				{
 					_inLoop = true;
 					_inLoopTimer = _maxTime;
 					_secondsText = "";
-					while {(_outOfBounds) || (_outOfBoundsAltitude)} do
+					while {(_outOfBoundsAltitude)} do
 					{
 						if (_inLoopTimer > 1) then
 						{
@@ -119,7 +118,7 @@ if (hasInterface) then
 							vehicle player setDamage 1;
 							player setDamage 1;
 						};
-						_outOfBounds = !(player inArea "playableArea");
+						//_outOfBounds = !(player inArea "playableArea");
 						_outOfBoundsAltitude = (getPos player select 2 > _maxHeight);
 					};
 					if (alive player) then
@@ -133,7 +132,7 @@ if (hasInterface) then
 						[_oobText, 10] call mf_notify_client;
 					};
 					_inLoop = false;
-					_outOfBounds = false;
+					//_outOfBounds = false;
 					_outOfBoundsAltitude = false;
 				};
 			};
