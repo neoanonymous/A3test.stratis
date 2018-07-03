@@ -121,12 +121,20 @@ A3W_mapDraw_thread = [] spawn
 
 				if (IS_FRIENDLY_PLAYER(_x) || (_newUnit getVariable ["playerSpawning", false] && IS_FRIENDLY_PLAYER(_newUnit))) then
 				{
+					if (_newUnit == player) exitWith {}; // covered via _playerCorpse
 					//_veh = vehicle _x;
 					//_pos = if (_mapIconsEnabled) then { DEFAULT_ICON_POS(_veh) } else { getPosASLVisual _x };
 
 					_newArrayIcons pushBack [["\A3\ui_f_curator\Data\CfgMarkers\kia_ca.paa", [0,0,0,0.6], nil, 22, 22, 0], _x, A3W_mapDraw_iconPos]; // draw skull
 				};
 			} forEach _allDeadMen;
+
+			// player body marker (disappear if the corpse is deleted)
+			_playerCorpse = player getVariable ["A3W_oldCorpse", objNull];
+			if (!isNull _playerCorpse) then
+			{
+				_newArrayIcons pushBack [["\A3\ui_f_curator\Data\CfgMarkers\kia_ca.paa", [0.5,1,0,0.6], nil, 22, 22, 0, profileName, 2], _playerCorpse, A3W_mapDraw_iconPos]; // draw gold skull
+			};
 
 			{
 				if (alive _x && IS_FRIENDLY_PLAYER(_x) && !(_x getVariable ["playerSpawning", false])) then
@@ -156,11 +164,12 @@ A3W_mapDraw_thread = [] spawn
 				};
 			} forEach _playableUnits;
 
-			if (!_mapIconsEnabled) then
-			{
+			// defaullt icons always disabled via disableMapIndicators
+			//if (!_mapIconsEnabled) then
+			//{
 				_veh = vehicle player;
 				_newArrayIcons pushBack [["\A3\ui_f\Data\IGUI\Cfg\IslandMap\iconplayer_ca.paa", [1,0,0,1], nil, 26, 26, getDirVisual _veh], _veh, A3W_mapDraw_iconPos]; // draw player circle
-			};
+			//};
 		};
 
 		A3W_mapDraw_arrIcons = _newArrayIcons;

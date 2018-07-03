@@ -50,9 +50,9 @@
 if !(isServer) exitWith {}; // DO NOT DELETE THIS LINE! 
 
 
-SL_cleanUpDuration = 3*60; // maximum duration time in seconds that items are left on the ground for. (default 2 minutes) 
-SL_cleanUpRadius = 250; // maximum radius in meters from store NPC to clean up. (default 15 meters) 
-SL_cleanUpSleep = 10; // sleep time in seconds per object loop check. (default 10 seconds) 
+SL_cleanUpDuration = 5; // maximum duration time in seconds that items are left on the ground for. (default 2 minutes) 
+SL_cleanUpRadius = 5; // maximum radius in meters from store NPC to clean up. (default 15 meters) 
+SL_cleanUpSleep = 5; // sleep time in seconds per object loop check. (default 10 seconds) 
 
 
 SL_cleanUpObjects = [ 
@@ -76,10 +76,38 @@ SL_cleanUpObjects = [
 _entitiesStoreNPC = ([0,0,0] nearEntities [["CAManBase"], worldSize]) - allPlayers; 
 
 
-_storeNumbers = 0; 
+_storeNumbers = 10; 
 _storePositions = []; 
 { 
-	_isStore = (toLower str _x) find "store"; 
+	_isStore = (toLower str _x) find "WalMart1"; 
+	_isStore = (toLower str _x) find "WalMart2"; 
+	_isStore = (toLower str _x) find "WalMart3";
+	_isStore = (toLower str _x) find "spawnshop1"; 
+	_isStore = (toLower str _x) find "spawnshop2"; 
+	_isStore = (toLower str _x) find "GenStore1"; 
+	_isStore = (toLower str _x) find "GenStore2"; 
+	_isStore = (toLower str _x) find "GenStore3"; 
+	_isStore = (toLower str _x) find "GenStore4"; 
+	_isStore = (toLower str _x) find "GenStore5"; 
+	_isStore = (toLower str _x) find "GenStore6"; 
+	_isStore = (toLower str _x) find "GenStore7"; 
+	_isStore = (toLower str _x) find "GenStore8"; 
+	_isStore = (toLower str _x) find "GunStore1"; 
+	_isStore = (toLower str _x) find "GunStore2"; 
+	_isStore = (toLower str _x) find "GunStore3"; 
+	_isStore = (toLower str _x) find "GunStore4"; 
+	_isStore = (toLower str _x) find "GunStore5"; 
+	_isStore = (toLower str _x) find "GunStore6"; 
+	_isStore = (toLower str _x) find "GunStore7"; 
+	_isStore = (toLower str _x) find "VehStore1"; 
+	_isStore = (toLower str _x) find "VehStore2"; 
+	_isStore = (toLower str _x) find "VehStore3"; 
+	_isStore = (toLower str _x) find "VehStore4"; 
+	_isStore = (toLower str _x) find "VehStore5"; 
+	_isStore = (toLower str _x) find "VehStore6";
+	_isStore = (toLower str _x) find "VehStore7";
+	_isStore = (toLower str _x) find "VehStore8";
+	_isStore = (toLower str _x) find "VehStore9";
 	if (_isStore != -1) then 
 	{ 
 		_storePositions pushBack (position _x); 

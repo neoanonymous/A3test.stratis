@@ -39,7 +39,11 @@ _objWeapons = [];
 	_class = _x select 0;
 	_container = _x select 1;
 
-	[_objItems, _class, 1] call fn_addToPairs;
+	// only add backpacks, since uniforms and vests already in _objItems via getItemCargo
+	if (_class isKindOf "Bag_Base") then
+	{
+		[_objItems, _class, 1] call fn_addToPairs;
+	};
 
 	{
 		[_objItems, _x select 0, _x select 1] call fn_addToPairs;
@@ -58,7 +62,7 @@ _objWeapons = [];
 } forEach everyContainer _obj;
 
 _allStoreMagazines = call allStoreMagazines;
-_allGunStoreFirearms = call allGunStoreFirearms;
+_allGunStoreFirearms = call allGunStoreFirearms + call genItemArray;
 _allStoreItems = call allRegularStoreItems + call allStoreGear;
 
 // Find parent or children equivalents to weapons which aren't listed in the gunstore
@@ -179,5 +183,14 @@ _allObjItems = [];
 		_item set [3, [_itemValue, _sellValue] select (_sellValue > 0)];
 	};
 } forEach _allObjItems;
+
+{
+	_x params ["_itemName", "_itemClass", "", "", "", "_sellValue"];
+	_itemQty = [_obj getVariable _itemClass] param [0,0,[0]];
+	if (_itemQty > 0) then
+	{
+		_allObjItems pushBack [_itemClass, _itemQty, _itemName, _sellValue];
+	};
+} forEach call customPlayerItems;
 
 _allObjItems

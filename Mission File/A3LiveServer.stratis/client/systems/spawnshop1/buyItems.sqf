@@ -39,7 +39,7 @@ storePurchaseHandle = _this spawn
 	_showInsufficientFundsError =
 	{
 		_itemText = _this select 0;
-		hint parseText format ["Not enough money for<br/>""%1""", _itemText];
+		hint parseText format ["Not enough money in the ATM for<br/>""%1""", _itemText];
 		playSound "FD_CP_Not_Clear_F";
 		_price = -1;
 	};

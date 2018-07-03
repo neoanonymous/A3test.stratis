@@ -113,7 +113,7 @@ _setupVars =
 		// Extreme
 		[
 			"PARPER UR ANUS!!", // Marker text
-			1500000, // Money
+			2500000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -138,6 +138,43 @@ _setupVars =
 					["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"], // Veh 4
 					["B_Heli_Attack_01_F"],
 					["B_Heli_Attack_01_F"]
+				]
+			]
+		],
+		// Extreme
+		[
+			"IMMINENT Doom inbound!!", // Marker text
+			5000000, // Money
+			[
+				[ // NATO convoy
+					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
+					["B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 2
+					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 3
+					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 4
+					["B_Heli_Attack_01_F"],
+					["B_Heli_Attack_01_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"]
+				],
+				[ // CSAT convoy
+					["O_APC_Wheeled_02_rcws_F", "O_APC_Tracked_02_cannon_F", "O_APC_Tracked_02_AA_F", "O_MBT_02_cannon_F"], // Veh 1
+					["O_APC_Tracked_02_AA_F", "O_MBT_02_cannon_F"], // Veh 2
+					["O_APC_Wheeled_02_rcws_F", "O_APC_Tracked_02_cannon_F", "O_APC_Tracked_02_AA_F", "O_MBT_02_cannon_F"], // Veh 3
+					["O_APC_Wheeled_02_rcws_F", "O_APC_Tracked_02_cannon_F", "O_APC_Tracked_02_AA_F", "O_MBT_02_cannon_F"], // Veh 4
+					["B_Heli_Attack_01_F"],
+					["B_Heli_Attack_01_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"]
+				],
+				[ // AAF convoy
+					["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"], // Veh 1
+					["I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"], // Veh 2
+					["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"], // Veh 3
+					["I_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F", "I_MBT_03_cannon_F"], // Veh 4
+					["B_Heli_Attack_01_F"],
+					["B_Heli_Attack_01_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"],
+					["O_Heli_Attack_02_dynamicLoadout_F"]
 				]
 			]
 		]

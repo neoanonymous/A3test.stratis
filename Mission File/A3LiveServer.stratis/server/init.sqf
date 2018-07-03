@@ -169,19 +169,18 @@ if (isServer) then
 		"A3W_privateParkingLimit",
 		"A3W_privateParkingCost",
 		"A3W_vehicleLocking",
+		"A3W_artilleryStrike",
+		"A3W_artilleryShells",
+		"A3W_artilleryRadius",
+		"A3W_artilleryCooldown",
+		"A3W_artilleryAmmo",
 		"A3W_disableBuiltInThermal",
-		"A3W_customDeathMessages",
 		"A3W_headshotNoRevive"
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];
 	addMissionEventHandler ["PlayerDisconnected", fn_onPlayerDisconnected];
-
-	// Temp fix for https://forums.bistudio.com/topic/190773-mission-event-handlers-playerconnected-and-playerdisconnected-do-not-work/
-	["A3W_missionEH_fix", "onPlayerConnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected", {}] call BIS_fnc_addStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerConnected"] call BIS_fnc_removeStackedEventHandler;
-	["A3W_missionEH_fix", "onPlayerDisconnected"] call BIS_fnc_removeStackedEventHandler;
+	addMissionEventHandler ["EntityKilled", fn_entityKilled];
 };
 
 _playerSavingOn = ["A3W_playerSaving"] call isConfigOn;

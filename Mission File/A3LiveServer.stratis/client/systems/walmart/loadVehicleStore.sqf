@@ -84,10 +84,22 @@ if (!isNil "_owner") then
 	};
 } foreach (call storeOwnerConfig);
 
+private _partList = _Dialog displayCtrl vehshop_part_list;
+_partList ctrlEnable false;
+_partList ctrlAddEventHandler ["LBSelChanged", compile preprocessFileLineNumbers "client\systems\walmart\partInfo.sqf"];
+
+private _defPartsChk = _Dialog displayCtrl vehshop_defparts_checkbox;
+_defPartsChk cbSetChecked true;
+_defPartsChk ctrlAddEventHandler ["CheckedChanged",
+{
+	params ["_defPartsChk", "_checked"];
+	((ctrlParent _defPartsChk) displayCtrl vehshop_part_list) ctrlEnable (_checked < 1);
+}];
+
 [] spawn
 {
 	disableSerialization;
-	_dialog = findDisplay vehshop_DIALOG;
+	_dialog = findDisplay wvehshop_DIALOG;
 	while {!isNull _dialog} do
 	{
 		_escMenu = findDisplay 49;

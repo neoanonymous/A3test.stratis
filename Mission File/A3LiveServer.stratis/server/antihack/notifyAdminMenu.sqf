@@ -17,13 +17,13 @@ _value = param [1, "", [0,"",[]]];
 
 switch (toLower _action) do
 {
-	case "money":
+	/*case "money":
 	{
 		if (_value > 0) then
 		{
 			_message = format ["[NOTICE] %1 used the admin menu to obtain $%2", name player, _value];
 		};
-	};
+	};*/
 	case "teleport":
 	{
 		_value resize 2;
@@ -43,13 +43,13 @@ switch (toLower _action) do
 	};
 };
 
-if (!isNil "_cfg" && {isClass _cfg}) then
+/*if (!isNil "_cfg" && {isClass _cfg}) then
 {
 	_displayStr = getText (_cfg >> "displayName");
 	if (_displayStr == "") then { _displayStr = _value } else { _value = _displayStr };
 
 	_message = format ['[NOTICE] %1 used the admin menu to obtain a "%2"', profileName, _displayStr];
-};
+};*/
 
 if (!isNil "_message" && {_message != ""}) then
 {

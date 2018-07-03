@@ -34,6 +34,8 @@ config_refuel_amounts = compileFinal str
 
 if (isServer) then
 {
-	config_territory_markers = compileFinal preprocessFileLineNumbers "mapConfig\territories.sqf";
+	private _configfile = selectrandom ["1"];
+	diag_log format ["Capture Territory is %1", _configfile];
+	config_territory_markers = compileFinal preprocessFileLineNumbers format ["mapConfig\TerritoryConfigs\%1.sqf", _configfile];
 	publicVariable "config_territory_markers";
 };

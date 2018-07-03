@@ -21,7 +21,8 @@ _exclMineIDs = [];
 {
 	private ["_mine", "_dummy", "_mineID", "_class", "_pos", "_dir", "_damage", "_owner", "_variables", "_hoursAlive", "_valid"];
 
-	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
+	//{ (_x select 1) call compile format ["%1 = _this", _x select 0] } forEach _x;
+	[] params _x; // automagic assignation
 
 	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
 	_valid = false;
@@ -42,7 +43,7 @@ _exclMineIDs = [];
 			[_mine, _dir] remoteExecCall ["setVectorDirAndUp", 0, _mine];
 		};
 
-		_dummy = createVehicle [STICKY_CHARGE_DUMMY_OBJ, [-1e6,-1e6,1e6], [], 0, ""];
+		_dummy = createVehicle [STICKY_CHARGE_DUMMY_OBJ, [-1e6,-1e6,1e6], [], 0, "NONE"];
 		_dummy setVariable ["A3W_stickyCharges_isDummy", true, true];
 		_dummy setObjectTextureGlobal [0,""];
 		_dummy attachTo [_mine, [0,0,0]];

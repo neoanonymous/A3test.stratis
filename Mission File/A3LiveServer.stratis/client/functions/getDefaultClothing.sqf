@@ -36,7 +36,7 @@ switch (_side) do
 		{
 			case (_isSniper):
 			{
-				if (_item == "uniform") then { _result = "U_O_FullGhillie_lsh" };
+				if (_item == "uniform") then { _result = "U_B_FullGhillie_lsh" };
 				if (_item == "vest") then { _result = _defaultVest };
 			};
 			case (_isDiver):
@@ -47,7 +47,7 @@ switch (_side) do
 			};
 			default
 			{
-				if (_item == "uniform") then { _result = "U_B_CombatUniform_mcam" };
+				if (_item == "uniform") then { _result = "U_B_CTRG_Soldier_F" };
 				if (_item == "vest") then { _result = _defaultVest };
 			};
 		};
@@ -71,7 +71,7 @@ switch (_side) do
 			};
 			default
 			{
-				if (_item == "uniform") then { _result = "U_O_OfficerUniform_ocamo" };
+				if (_item == "uniform") then { _result = "U_O_V_Soldier_Viper_hex_F" };
 				if (_item == "vest") then { _result = _defaultVest };
 			};
 		};
@@ -84,7 +84,7 @@ switch (_side) do
 		{
 			case (_isSniper):
 			{
-				if (_item == "uniform") then { _result = "U_O_FullGhillie_lsh" };
+				if (_item == "uniform") then { _result = "U_I_FullGhillie_lsh" };
 				if (_item == "vest") then { _result = _defaultVest };
 			};
 			case (_isDiver):
@@ -95,7 +95,7 @@ switch (_side) do
 			};
 			default
 			{
-				if (_item == "uniform") then { _result = "U_I_CombatUniform" };
+				if (_item == "uniform") then { _result = "U_I_FullGhillie_lsh" };
 				if (_item == "vest") then { _result = _defaultVest };
 			};
 		};

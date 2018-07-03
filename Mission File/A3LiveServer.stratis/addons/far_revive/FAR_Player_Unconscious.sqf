@@ -24,6 +24,8 @@ if (alive _unit) then
 	};
 };
 
+private _unitWeapon = currentWeapon _unit;
+
 [_unit, diag_tickTime] spawn
 {
 	params ["_unit", "_time"];
@@ -123,14 +125,18 @@ if (!isPlayer _unit) then
 };
 
 // Injury message
-if (FAR_EnableDeathMessages && (isPlayer _unit || FAR_Debugging)) then
+if (isPlayer _unit || FAR_Debugging) then
 {
 	_unit spawn
 	{
 		waitUntil {!UNCONSCIOUS(_this) || !alive _this || _this getVariable ["FAR_headshotHitTimeout", false]};
-		if (!alive _this) exitWith {};
 
-		[_this, false] call A3W_fnc_killBroadcast;
+		[_this,
+		{
+			if (!alive _this) exitWith {};
+			_this setVariable ["FAR_injuryBroadcast", true];
+			[_this, false] call A3W_fnc_killBroadcast;
+		}] execFSM "call.fsm";
 	};
 };
 
@@ -460,8 +466,10 @@ if (alive _unit && !UNCONSCIOUS(_unit)) then // Player got revived
 		{ _unit enableAI _x } forEach ["MOVE","FSM","TARGET","AUTOTARGET"];
 	};
 
-	private _wep = [_unit, true] call getMoveWeapon;
-	_unit playMove format ["AmovPpneMstpS%1W%2Dnon", ["ras","non"] select (_wep == "non"), _wep];
+	// prevent rocket launcher switch because of annoying position freeze
+	if (_unitWeapon == secondaryWeapon _unit) then { _unitWeapon = primaryWeapon _unit };
+	if (_unitWeapon == "") then { _unitWeapon = handgunWeapon _unit };
+	_unit selectWeapon _unitWeapon;
 }
 else // Player bled out
 {

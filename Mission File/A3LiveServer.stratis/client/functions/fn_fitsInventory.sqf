@@ -49,8 +49,8 @@ if (!isNil "_allowedContainers") then
 		{
 			switch (toLower _x) do
 			{
-				case "uniform":  { _allowedContainers set [_forEachIndex, 701] };
-				case "vest":     { _allowedContainers set [_forEachIndex, 801] };
+				case "uniform":  { _allowedContainers set [_forEachIndex, 801] };
+				case "vest":     { _allowedContainers set [_forEachIndex, 701] };
 				case "backpack": { _allowedContainers set [_forEachIndex, 901] };
 			};
 		};
@@ -87,14 +87,14 @@ _uniform = uniform _unit;
 _vest = vest _unit;
 _backpack = backpack _unit;
 
-if (_uniform != "" && (isNil "_allowedSlots" || {701 in _allowedSlots})) then
+if (_uniform != "" && (isNil "_allowedSlots" || {801 in _allowedSlots})) then
 {
 	_containerClass = getText (configFile >> "CfgWeapons" >> _uniform >> "ItemInfo" >> "containerClass");
 	_uniformCapacity = getNumber (configFile >> "CfgVehicles" >> _containerClass >> "maximumLoad");
 	_uniformFree = _uniformCapacity - ((loadUniform _unit) * _uniformCapacity);
 };
 
-if (_vest != "" && (isNil "_allowedSlots" || {801 in _allowedSlots})) then
+if (_vest != "" && (isNil "_allowedSlots" || {701 in _allowedSlots})) then
 {
 	_containerClass = getText (configFile >> "CfgWeapons" >> _vest >> "ItemInfo" >> "containerClass");
 	_vestCapacity = getNumber (configFile >> "CfgVehicles" >> _containerClass >> "maximumLoad");

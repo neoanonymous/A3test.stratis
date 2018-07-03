@@ -10,6 +10,7 @@ _veh = _this select 0;
 _flying = if (count _this > 1) then { _this select 1 } else { false };
 
 _class = typeOf _veh;
+private _vehCfg = configFile >> "CfgVehicles" >> _class;
 _purchasedVehicle = _veh getVariable ["A3W_purchasedVehicle", false];
 _missionVehicle = (_veh getVariable ["A3W_missionVehicle", false] && !(_veh getVariable ["R3F_LOG_disabled", false]));
 
@@ -28,6 +29,10 @@ _hpDamage = getAllHitPointsDamage _veh;
 		_hitPoints pushBack [_x, (_hpDamage select 2) select _forEachIndex];
 	};
 } forEach (_hpDamage select 0);
+
+// same display conditions as in BIS_fnc_garage (vehicle appearance editor)
+private _animPhases = (configProperties [_vehCfg >> "AnimationSources", "getText (_x >> 'displayName') != '' && {getNumber (_x >> 'scope') > 1 || !isNumber (_x >> 'scope')}"])
+                      apply { [configName _x, [0,1] select (_veh animationPhase configName _x >= 1)] };
 
 _variables = [];
 
@@ -57,11 +62,16 @@ if (_resupplyTruck) then
 	_variables pushBack ["A3W_resupplyTruck", true];
 };
 
-private _isUav = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") > 0);
+private _isUav = unitIsUAV _veh;
 
-if (_isUav && side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+if (_isUav) then
 {
-	_variables pushBack ["uavSide", str side _veh];
+	if (side _veh in [BLUFOR,OPFOR,INDEPENDENT]) then
+	{
+		_variables pushBack ["uavSide", str side _veh];
+	};
+
+	_variables pushBack ["uavAuto", isAutonomous _veh];
 };
 
 _owner = _veh getVariable ["ownerUID", ""];
@@ -70,6 +80,12 @@ private _ownerName = _veh getVariable ["ownerName", ""];
 if (_ownerName != "") then
 {
 	_variables pushBack ["ownerName", toArray _ownerName];
+};
+
+private _artiCount = [_veh getVariable "artillery"] param [0,0,[0]];
+if (_artiCount >= 1) then
+{
+	_variables pushBack ["artillery", 1]; // capped at 1 for safety
 };
 
 private _locked = 1 max locked _veh; // default vanilla state is always 1, so we ignore 0's
@@ -104,7 +120,7 @@ else // texture paths
 	};
 
 	// vehicle has at least 2 random textures, save everything
-	if (count getArray (configFile >> "CfgVehicles" >> _class >> "textureList") >= 4) then
+	if (count getArray (_vehCfg >> "textureList") >= 4) then
 	{
 		{ _x = [_forEachIndex, _x]; call _addTexture } forEach getObjectTextures _veh;
 	}
@@ -122,10 +138,16 @@ _backpacks = [];
 if (_class call fn_hasInventory) then
 {
 	// Save weapons & ammo
-	_weapons = (getWeaponCargo _veh) call cargoToPairs;
-	_magazines = _veh call fn_magazineAmmoCargo;
-	_items = (getItemCargo _veh) call cargoToPairs;
-	_backpacks = (getBackpackCargo _veh) call cargoToPairs;
+	//_weapons = (getWeaponCargo _veh) call cargoToPairs;
+	//_magazines = _veh call fn_magazineAmmoCargo;
+	//_items = (getItemCargo _veh) call cargoToPairs;
+	//_backpacks = (getBackpackCargo _veh) call cargoToPairs;
+
+	private _cargo = _veh call fn_containerCargoToPairs;
+	_weapons = _cargo select 0;
+	_magazines = _cargo select 1;
+	_items = _cargo select 2;
+	_backpacks = _cargo select 3;
 };
 
 // _turretMags is deprecated, leave empty
@@ -135,7 +157,7 @@ _turretMags3 = _veh call fn_getPylonsAmmo;
 
 // deprecated
 /*
-_hasDoorGuns = isClass (configFile >> "CfgVehicles" >> _class >> "Turrets" >> "RightDoorGun");
+_hasDoorGuns = isClass (_vehCfg >> "Turrets" >> "RightDoorGun");
 
 _turrets = allTurrets [_veh, false];
 
@@ -193,6 +215,7 @@ _props =
 	["Fuel", _fuel],
 	["Damage", _damage],
 	["HitPoints", _hitPoints],
+	["AnimPhases", _animPhases],
 	["OwnerUID", _owner],
 	["LockState", _locked],
 	["Variables", _variables],

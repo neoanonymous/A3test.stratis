@@ -21,29 +21,12 @@ if (isNil "_killer" || {isNull _killer}) then
 	_killer = [_instigator, _presumedKiller] select isNull _instigator;
 };
 
-createBodyMarker = 
-{
-	deleteMarkerLocal "deadMarker";
-	_pos = getPos (vehicle player);
-	_dMarker = createMarkerLocal ["deadMarker", _pos];
-	_dMarker setMarkerShapeLocal "ICON";
-	_dMarker setMarkerAlphaLocal 1;
-	_dMarker setMarkerPosLocal _pos;
-	_dMarker setMarkerTextLocal "R.I.P.";
-	_dMarker setMarkerColorLocal "ColorBlue";
-	_dMarker setMarkerTypeLocal "waypoint";
-	_dMarker setMarkerSizeLocal [0.6,0.6];
-	sleep 600;
-	deleteMarkerLocal _dMarker;
-};
-[] spawn createBodyMarker;
-
 _killer = effectiveCommander _killer;
 _deathCause = _player getVariable ["A3W_deathCause_local", []];
 
 if (_player getVariable ["FAR_isUnconscious", 0] == 1 && _deathCause isEqualTo []) then
 {
-	_deathCause = ["bleedout"];
+	_deathCause = [["kill","bleedout"] select (_player getVariable ["FAR_injuryBroadcast", false])];
 	_player setVariable ["A3W_deathCause_local", _deathCause];
 };
 
@@ -56,7 +39,7 @@ if (_killer == _player) then
 		_deathCause = switch (true) do
 		{
 			case (_player == player && ([missionNamespace getVariable "thirstLevel"] param [0,1,[0]] <= 0 || [missionNamespace getVariable "hungerLevel"] param [0,1,[0]] <= 0)): { "survival" };
-			case (getOxygenRemaining _player <= 0 && (_player modelToWorld [0,0,0]) select 2 < -0.1): { "drown" };
+			case (getOxygenRemaining _player <= 0 && getPosASLW _player select 2 < -0.1): { "drown" };
 			default { "suicide" };
 		};
 
@@ -106,7 +89,8 @@ _player spawn
 	_player = _this;
 
 	_money = _player getVariable ["cmoney", 0];
-	_player setVariable ["cmoney", 0, true];
+	//_player setVariable ["cmoney", 0, true];
+	[player, 0, true] call A3W_fnc_setCMoney;
 
 	_items = if (_player == player) then { true call mf_inventory_list } else { [] };
 

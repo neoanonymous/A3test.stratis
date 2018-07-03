@@ -40,7 +40,7 @@ storeSellingHandle = [] spawn
 		{
 			_sellValue = GET_HALF_PRICE(_x select 2);
 		};
-	} forEach (call allGunStoreFirearms);
+	} forEach (call allGunStoreFirearms + call genItemArray);
 
 	_magsToSell = [];
 
@@ -84,7 +84,7 @@ storeSellingHandle = [] spawn
 			{
 				_magValue = _x select 2;
 			};
-		} forEach (call ammoArray + call ssammoArray);
+		} forEach (call ammoArray);
 
 		{
 			_sellValue = _sellValue + GET_HALF_PRICE(_magValue * (_x / _magFullAmmo)); // Get selling price relative to ammo count
@@ -139,7 +139,8 @@ storeSellingHandle = [] spawn
 			};
 		} forEach _invMagsToRemove;
 
-		player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _sellValue, true];
+		//player setVariable ["cmoney", (player getVariable ["cmoney", 0]) + _sellValue, true];
+		[player, _sellValue] call A3W_fnc_setCMoney;
 		hint format ["You sold your gun for $%1", [_sellValue] call fn_numbersText];
 	};
 };

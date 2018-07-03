@@ -28,8 +28,8 @@ X_JIP = false;
 
 CHVD_allowNoGrass = false;
 CHVD_allowTerrain = false; // terrain option has been disabled out from the menu due to terrible code, this variable has currently no effect
-CHVD_maxView = 3000; // Set maximum view distance (default: 12000)
-CHVD_maxObj = 3000; // Set maximimum object view distance (default: 12000)
+CHVD_maxView = 5000; // Set maximum view distance (default: 12000)
+CHVD_maxObj = 5000; // Set maximimum object view distance (default: 12000)
 
 // versionName = ""; // Set in STR_WL_WelcomeToWasteland in stringtable.xml
 
@@ -94,9 +94,10 @@ if (hasInterface || isServer) then
 	[] execVM "addons\HvT\HvT.sqf";//HVT
 	[] execVM "addons\Grenades\initGrenades.sqf";//Toxic Gas Nades
 	[] execVM "addons\laptop\init.sqf"; // addon for hack laptop mission
-	[] execVM "addons\outOfBounds\outOfBounds.sqf";//OutOfBounds
+	//[] execVM "addons\outOfBounds\outOfBounds.sqf";//OutOfBounds
 	[] execVM "addons\scripts\playerJump.sqf";//playerJump
 	[] execVM "addons\purchaseFuel\purchaseFuelInit.sqf";//Players have to pay for fuel
+	[] execVM "addons\APOC_Airdrop_Assistance\init.sqf";  // Airdrop
 	[] execVM "addons\parking\functions.sqf";
 	[] execVM "addons\storage\functions.sqf";
 	[] execVM "addons\vactions\functions.sqf";
@@ -106,7 +107,7 @@ if (hasInterface || isServer) then
 	[] execVM "addons\outlw_magrepack\MagRepack_init.sqf";
 	[] execVM "addons\lsd_nvg\init.sqf";
 	[] execVM "addons\stickyCharges\init.sqf";
-	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
+	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };	
 };
 
 // Remove line drawings from map
@@ -116,3 +117,7 @@ if (hasInterface || isServer) then
 	"thisTrigger setTriggerTimeout [30,30,30,false]",
 	"{if (markerShape _x == 'POLYLINE') then {deleteMarker _x}} forEach allMapMarkers"
 ];
+
+
+//get rid of the animals
+enableEnvironment [false, true];

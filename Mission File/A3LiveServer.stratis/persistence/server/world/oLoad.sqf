@@ -5,6 +5,7 @@
 //	@file Author: AgentRev, JoSchaap, Austerror
 
 #include "functions.sqf"
+#define STR_TO_SIDE(VAL) ([sideUnknown,BLUFOR,OPFOR,INDEPENDENT,CIVILIAN,sideLogic] select ((["WEST","EAST","GUER","CIV","LOGIC"] find toUpper (VAL)) + 1))
 
 private ["_maxLifetime", "_isWarchestEntry", "_isBeaconEntry", "_worldDir", "_methodDir", "_objCount", "_objects", "_exclObjectIDs"];
 
@@ -24,7 +25,8 @@ _exclObjectIDs = [];
 {
 	private ["_allowed", "_obj", "_objectID", "_class", "_pos", "_dir", "_locked", "_damage", "_allowDamage", "_owner", "_variables", "_weapons", "_magazines", "_items", "_backpacks", "_turretMags", "_ammoCargo", "_fuelCargo", "_repairCargo", "_hoursAlive", "_valid"];
 
-	{ (_x select 1) call compile format ["%1 = _this", _x select 0]	} forEach _x;
+	//{ (_x select 1) call compile format ["%1 = _this", _x select 0] } forEach _x;
+	[] params _x; // automagic assignation
 
 	if (isNil "_locked") then { _locked = 1 };
 	if (isNil "_hoursAlive") then { _hoursAlive = 0 };
@@ -90,6 +92,9 @@ _exclObjectIDs = [];
 			_obj setVariable ["ownerUID", _owner, true];
 		};
 
+		private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };
+		private _uavAuto = true;
+
 		{
 			_var = _x select 0;
 			_value = _x select 1;
@@ -114,10 +119,26 @@ _exclObjectIDs = [];
 						default { _value = "[Beacon]" };
 					};
 				};
+				case "uavSide":
+				{
+					if (_uavSide isEqualTo sideUnknown) then { _uavSide = STR_TO_SIDE(_value) };
+				};
+				case "uavAuto":
+				{
+					if (_value isEqualType true) then
+					{
+						_uavAuto = _value;
+					};
+				};
 			};
 
 			_obj setVariable [_var, _value, true];
 		} forEach _variables;
+
+		if (unitIsUAV _obj) then
+		{
+			[_obj, _uavSide, false, _uavAuto] spawn fn_createCrewUAV;
+		};
 
 		clearWeaponCargoGlobal _obj;
 		clearMagazineCargoGlobal _obj;

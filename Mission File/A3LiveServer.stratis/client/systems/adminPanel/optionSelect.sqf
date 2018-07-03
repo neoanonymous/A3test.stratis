@@ -42,9 +42,10 @@ if (_uid call isAdmin) then
 					closeDialog 0;
 					createDialog "MarkerLog";
 				};
-				case 3: //Tags
+				case 3: // admin spectate (soulkobk)
 				{
-					execVM "client\systems\adminPanel\playerTags.sqf";
+					closeDialog 0;
+					execVM "client\systems\adminPanel\adminSpectate.sqf";
 				};
 				
 				case 4: //Teleport
@@ -86,7 +87,8 @@ if (_uid call isAdmin) then
 				case 9: //Money
 				{
 					_money = 500000;
-					player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
+					//player setVariable ["cmoney", (player getVariable ["cmoney",0]) + _money, true];
+					[player, _money] call A3W_fnc_setCMoney;
 					if (!isNil "notifyAdminMenu") then { ["money", _money] call notifyAdminMenu };
 				};
 				case 10: //Debug Menu
@@ -98,10 +100,9 @@ if (_uid call isAdmin) then
 				{
 					execVM "client\systems\adminPanel\toggleGodMode.sqf";
 				};
-				case 12: // admin spectate (soulkobk)
+				case 12: //Tags
 				{
-					closeDialog 0;
-					execVM "client\systems\adminPanel\adminSpectate.sqf";
+					execVM "client\systems\adminPanel\playerTags.sqf";
 				};
 			};
 		};

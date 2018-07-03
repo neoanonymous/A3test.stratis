@@ -51,7 +51,11 @@ _resupplyThread = [_vehicle, _unit] spawn
 		};
 	} forEach (call allVehStoreVehicles + call staticGunsArray);
 
-	_titleText = { titleText [_this, "PLAIN DOWN", ((REARM_TIME_SLICE max 1) / 10) max 0.3] };
+	_titleText =
+	{
+		params ["_text", ["_time",((REARM_TIME_SLICE max 1) / 10) max 0.3,[0]]];
+		titleText [_text, "PLAIN DOWN", _time];
+	};
 
 	_checkAbortConditions =
 	{
@@ -161,7 +165,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		{
 			_text = format ["%1\n%2", "Resupply sequence started", "Please get out of the static weapon."];
 			titleText [_text, "PLAIN DOWN", 0.5];
-			sleep 10;
+			sleep 5;
 
 			call _checkAbortConditions;
 		};
@@ -197,7 +201,8 @@ _resupplyThread = [_vehicle, _unit] spawn
 		call _checkPlayerMoney;
 
 		//start resupply here
-		player setVariable ["cmoney", (player getVariable ["cmoney",0]) - _price, true];
+		//player setVariable ["cmoney", (player getVariable ["cmoney",0]) - _price, true];
+		[player, -_price] call A3W_fnc_setCMoney;
 		_text = format ["%1\n%2", format ["You paid $%1 to resupply %2.", _price, _vehName], "Please stand by..."];
 		[_text, 10] call mf_notify_client;
 		[] spawn fn_savePlayerData;
@@ -205,6 +210,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		call _checkAbortConditions;
 
 		private _pathArrs = [];
+		private _notFull = false;
 
 		// Collect turret mag data
 		{
@@ -222,6 +228,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 				if (_ammo < getNumber (configFile >> "CfgMagazines" >> _mag >> "count")) then
 				{
 					(_pathArr select _index) set [2, true]; // mark mag for reload
+					_notFull = true;
 				};
 
 				if (_new) then { _pathArrs pushBack [_path, _pathArr] };
@@ -231,7 +238,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		_checkDone = true;
 
 		// Reload turret mags
-		{
+		/*{
 			_x params ["_path", "_magPairs"];
 
 			{
@@ -276,6 +283,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		} forEach _pathArrs;
 
 		_pylonPaths = (configProperties [_vehCfg >> "Components" >> "TransportPylonsComponent" >> "Pylons", "isClass _x"]) apply {getArray (_x >> "turret")};
+		*/
 
 		{
 			if (_x != "") then
@@ -284,7 +292,9 @@ _resupplyThread = [_vehicle, _unit] spawn
 
 				if (_vehicle ammoOnPylon (_forEachIndex + 1) < getNumber (_magCfg >> "count")) then
 				{
-					call _checkAbortConditions;
+					_notFull = true;
+
+					/*call _checkAbortConditions;
 
 					_text = format ["Reloading %1...", getText (_magCfg >> "displayName")];
 					_text call _titleText;
@@ -294,52 +304,71 @@ _resupplyThread = [_vehicle, _unit] spawn
 
 					_vehicle setPylonLoadOut [_forEachIndex + 1, _x, true, _pylonPaths select _forEachIndex];
 
-					sleep (REARM_TIME_SLICE / 2);
+					sleep (REARM_TIME_SLICE / 2);*/
 				};
 			};
 		} forEach getPylonMagazines _vehicle;
 
+		// let's skip all the above reload bullshit, and instead just put a 5-sec sleep then setVehicleAmmo 1, much simpler
+		if (_notFull) then
+		{
+			call _checkAbortConditions;
+			playSound3D ["A3\Sounds_F\arsenal\weapons_static\Static_HMG\reload_static_HMG.wss", _vehicle, false, getPosASL _vehicle, 10, 1, 20 max sizeOf _vehClass];
+
+			private "_i";
+			for "_i" from 1 to REARM_TIME_SLICE do
+			{
+				"Reloading..." call _titleText;
+				sleep 1;
+				call _checkAbortConditions;
+			};
+		};
+
+		_vehicle setVehicleAmmo 1;
 		[_vehicle, false, true, true] call A3W_fnc_setVehicleLoadout;
 
 		_checkDone = true;
 
 		(getAllHitPointsDamage _vehicle) params ["_hitPoints", "_selections", "_dmgValues"];
-		_repairSlice = if (count _hitPoints > 0) then { REPAIR_TIME_SLICE min (10 / (count _hitPoints)) } else { 0 }; // no longer than 10 seconds
 
+		if (!isNil "_hitPoints") then
 		{
-	
-			if (_dmgValues select _forEachIndex > 0.001) then
+			_repairSlice = if (count _hitPoints > 0) then { REPAIR_TIME_SLICE min (10 / (count _hitPoints)) } else { 0 }; // no longer than 10 seconds
+
 			{
-				if (_checkDone) then
+				if (_dmgValues select _forEachIndex > 0.001) then
 				{
-					_checkDone = false;
-					sleep 3;
-				};
-
-				call _checkAbortConditions;
-
-				"Repairing..." call _titleText;
-				sleep (_repairSlice / 2);
-				call _checkAbortConditions;
-
-				if (_x != "") then
-				{
-					_vehicle setHitpointDamage [_x, 0];
-				}
-				else
-				{
-					_selName = _selections select _forEachIndex;
-
-					if (_selName != "") then
+					if (_checkDone) then
 					{
-						_vehicle setHit [_selName, 0];
+						_checkDone = false;
+						sleep 3;
 					};
-				};
 
-				sleep (_repairSlice / 2);
-				_repaired = true;
-			};
-		} forEach _hitPoints;
+					call _checkAbortConditions;
+
+					"Repairing..." call _titleText;
+					sleep (_repairSlice / 2);
+					call _checkAbortConditions;
+
+					if (_x != "") then
+					{
+						_vehicle setHitpointDamage [_x, 0];
+					}
+					else
+					{
+						_selName = _selections select _forEachIndex;
+
+						if (_selName != "") then
+						{
+							_vehicle setHit [_selName, 0];
+						};
+					};
+
+					sleep (_repairSlice / 2);
+					_repaired = true;
+				};
+			} forEach _hitPoints;
+		};
 
 		if (damage _vehicle > 0.001) then
 		{
@@ -356,6 +385,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		// reset ejection seat crap
 		if (_vehicle isKindOf "Plane") then
 		{
+			_vehicle setVariable ["bis_ejected", nil, true];
 			{ _vehicle animate [_x, 0, true] } forEach ["canopy_hide", "ejection_seat_motion", "ejection_seat_hide"];
 		};
 

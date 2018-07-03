@@ -60,15 +60,15 @@ call compile preprocessFileLineNumbers "addons\far_revive\FAR_revive_init.sqf";
 
 A3W_scriptThreads pushBack execVM "client\functions\evalManagedActions.sqf";
 
-pvar_playerRespawn = [player, objNull];
-publicVariableServer "pvar_playerRespawn";
+[player, objNull] remoteExec ["A3W_fnc_playerRespawnServer", 2];
 
 //Player setup
 player call playerSetupStart;
 
 // Deal with money here
 _baseMoney = ["A3W_startingMoney", 100] call getPublicVar;
-player setVariable ["cmoney", _baseMoney, true];
+//player setVariable ["cmoney", _baseMoney, true];
+[player, _baseMoney, true] call A3W_fnc_setCMoney;
 
 // Player saving - load data
 if (["A3W_playerSaving"] call isConfigOn) then

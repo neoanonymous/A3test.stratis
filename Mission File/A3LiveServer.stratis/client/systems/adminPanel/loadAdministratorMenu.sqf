@@ -22,7 +22,7 @@ if ([_uid, 2] call isAdmin) then {
 					"Player Management",
 					"Vehicle Management",
 					"Map Markers Log",
-					"Group Leader Markers",
+					"Spectate",
 					"Teleport",
 					"Unstuck Player"
 	];

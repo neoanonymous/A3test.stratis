@@ -408,7 +408,7 @@ class wgunshopd
 		class VikStoreOpen: w_RscButton
 		{
 			idc = -1;
-			action = "closeDialog 0; [0] execVM 'client\systems\walmart\loadVehicleStore.sqf';";
+			action = "closeDialog 0; sleep 0.25; execVM 'client\systems\walmart\loadVehicleStore.sqf', [], 1, true, true, "", STORE_ACTION_CONDITION;";
 			text = "Vehicle Store";
 			sizeEx = GunStoreButton_textSize;
 
